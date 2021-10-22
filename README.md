@@ -14,11 +14,11 @@ Untuk Pemenuhan Tugas Besar Algoritma Struktur Data IF2110
 
 ## Compile
 
-`$ gcc src/main.c src/ADT/implementation/*.c src/Utility/*.c -o bin/Main`
+`$ gcc src/main.c src/ADT/implementation/*.c src/Utility/implementation/*.c -o bin/Main`
 
 ## Run
 
-`$ .\bin\Main`
+`$ ./bin/Main`
 
 # About
 
