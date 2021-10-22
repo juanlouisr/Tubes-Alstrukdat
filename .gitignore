@@ -1,2 +1,6 @@
-*.o
+# Ignore Object Files
+*.o 
+# Ignore Compiled Files
 *.exe
+# Ignore vscode configuration folder
+.vscode
