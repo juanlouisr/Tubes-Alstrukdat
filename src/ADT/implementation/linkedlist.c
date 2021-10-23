@@ -56,7 +56,7 @@ void DeleteToDoList(LinkedList* head, Item item)
 /* menghapus item yang sama dari to do list */ 
 {
     LinkedList *current = ToDoNext(*head);
-    LinkedList *prev;
+    LinkedList *prev = head;
     boolean found = false;
     while (current != NULL && !found) 
     {
