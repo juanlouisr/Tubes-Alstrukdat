@@ -7,11 +7,11 @@
 #include "boolean.h"
 #include "charmachine.h"
 
-#define CAPACITY 50
+#define WORDCAP 50
 #define BLANK ' '
 
 typedef struct {
-   char contents[CAPACITY]; /* container penyimpan kata, indeks yang dipakai [0..CAPACITY-1] */
+   char contents[WORDCAP]; /* container penyimpan kata, indeks yang dipakai [0..CAPACITY-1] */
    int length;
 } Word;
 
