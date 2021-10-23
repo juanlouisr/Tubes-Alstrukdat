@@ -1,5 +1,3 @@
-
-#include "boolean.h"
 #include "../header/stack.h"
 #include <stdio.h>
 
@@ -23,7 +21,7 @@ boolean isEmpty(Stack s)
 boolean isFull(Stack s)
 /* Mengirim true jika tabel penampung nilai s stack penuh */
 {
-    return (IDX_TOP(s) == CAPACITY - 1);
+    return (IDX_TOP(s) == TASCAP - 1);
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */

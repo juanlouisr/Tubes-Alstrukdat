@@ -8,11 +8,11 @@
 #include "boolean.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 100
+#define TASCAP 100
 
 typedef int ElType;
 typedef struct {
-  ElType buffer[CAPACITY]; /* tabel penyimpan elemen */
+  ElType buffer[TASCAP]; /* tabel penyimpan elemen */
   int idxTop;              /* alamat TOP: elemen puncak */
 } Stack;
 

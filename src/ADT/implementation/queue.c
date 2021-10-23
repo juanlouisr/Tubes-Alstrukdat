@@ -23,9 +23,9 @@ boolean isEmpty(Queue q)
 
 boolean isFull(Queue q)
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
-/* yaitu jika index head bernilai 0 dan index tail bernilai CAPACITY-1 */
+/* yaitu jika index head bernilai 0 dan index tail bernilai QUEUECAP-1 */
 {
-    return (IDX_HEAD(q) == 0 && IDX_TAIL(q) == (CAPACITY - 1));
+    return (IDX_HEAD(q) == 0 && IDX_TAIL(q) == (QUEUECAP - 1));
 }
 
 int length(Queue q)
@@ -49,7 +49,7 @@ void enqueue(Queue *q, ElType val)
     }
     else
     {
-        if (IDX_TAIL(*q) == CAPACITY - 1)
+        if (IDX_TAIL(*q) == QUEUECAP - 1)
         {
             int i;
             for (i = IDX_HEAD(*q); i <= IDX_TAIL(*q); i++)

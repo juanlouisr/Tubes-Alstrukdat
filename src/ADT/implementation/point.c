@@ -1,5 +1,3 @@
-
-#include "boolean.h"
 #include "../header/point.h"
 #include <stdio.h>
 #include <math.h>

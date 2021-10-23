@@ -10,7 +10,7 @@
 #include "boolean.h"
 
 /*  Kamus Umum */
-#define CAPACITY 100
+#define LSCAP 100
 /* Kapasitas penyimpanan */
 #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
@@ -20,9 +20,9 @@
 /* Definisi elemen dan koleksi objek */
 typedef int ElType;  /* type elemen List */
 typedef struct {
-   ElType contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+   ElType contents[LSCAP]; /* memori tempat penyimpan elemen (container) */
 } ListPos;
-/* Indeks yang digunakan [0..CAPACITY-1] */
+/* Indeks yang digunakan [0..LSCAP-1] */
 /* Jika l adalah ListPos, cara deklarasi dan akses: */
 /* Deklarasi : l : ListPos */
 /* Maka cara akses: 
@@ -32,13 +32,13 @@ typedef struct {
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 
 /* ********** SELEKTOR ********** */
-#define ELMT(l, i) (l).contents[(i)]
+#define ELMTLS(l, i) (l).contents[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
 void CreateListPos(ListPos *l);
 /* I.S. l sembarang */
-/* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
+/* F.S. Terbentuk List l kosong dengan kapasitas LSCAP */
 /* Proses: Inisialisasi semua elemen List l dengan VAL_UNDEF */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
@@ -70,9 +70,9 @@ void readList(ListPos *l);
 /* F.S. List l terdefinisi */
 /* Proses: membaca banyaknya elemen l dan mengisi nilainya */
 /* 1. Baca banyaknya elemen diakhiri enter, misalnya n */
-/*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= CAPACITY */
+/*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= LSCAP */
 /*    Jika n tidak valid, tidak diberikan pesan kesalahan */
-/* 2. Jika 0 < n <= CAPACITY; Lakukan n kali: 
+/* 2. Jika 0 < n <= LSCAP; Lakukan n kali: 
           Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
 /*    Jika n = 0; hanya terbentuk List kosong */
 void displayList(ListPos l);

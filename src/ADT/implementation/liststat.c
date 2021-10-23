@@ -1,4 +1,4 @@
-#include "boolean.h"
+
 #include "../header/liststat.h"
 #include <stdio.h>
 
@@ -6,13 +6,13 @@
 /* Konstruktor : create List kosong  */
 void CreateListPos(ListPos *l)
 /* I.S. l sembarang */
-/* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
+/* F.S. Terbentuk List l kosong dengan kapasitas LSCAP */
 /* Proses: Inisialisasi semua elemen List l dengan VAL_UNDEF */
 {
     int i;
-    for (i = 0; i < CAPACITY; i++)
+    for (i = 0; i < LSCAP; i++)
     {
-        ELMT(*l, i) = VAL_UNDEF;
+        ELMTLS(*l, i) = VAL_UNDEF;
     }
 }
 
@@ -30,9 +30,9 @@ int length(ListPos l)
     }
     else
     {
-        while (i < CAPACITY && notMark)
+        while (i < LSCAP && notMark)
         {
-            if (ELMT(l, i) != VAL_UNDEF)
+            if (ELMTLS(l, i) != VAL_UNDEF)
             {
                 i++;
             }
@@ -50,7 +50,7 @@ boolean isIdxValid(ListPos l, int i)
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas List l */
 /* yaitu antara indeks yang terdefinisi utk container*/
 {
-    return (i > IDX_UNDEF && i < CAPACITY);
+    return (i > IDX_UNDEF && i < LSCAP);
 }
 
 boolean isIdxEff(ListPos l, int i)
@@ -65,14 +65,14 @@ boolean isIdxEff(ListPos l, int i)
 boolean isEmpty(ListPos l)
 /* Mengirimkan true jika List l kosong, mengirimkan false jika tidak */
 {
-    return (ELMT(l, 0) == VAL_UNDEF);
+    return (ELMTLS(l, 0) == VAL_UNDEF);
 }
 
 /* *** Test List penuh *** */
 boolean isFull(ListPos l)
 /* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
 {
-    return (ELMT(l, CAPACITY - 1) != VAL_UNDEF);
+    return (ELMTLS(l, LSCAP - 1) != VAL_UNDEF);
 }
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
@@ -82,9 +82,9 @@ void readList(ListPos *l)
 /* F.S. List l terdefinisi */
 /* Proses: membaca banyaknya elemen l dan mengisi nilainya */
 /* 1. Baca banyaknya elemen diakhiri enter, misalnya n */
-/*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= CAPACITY */
+/*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= LSCAP */
 /*    Jika n tidak valid, tidak diberikan pesan kesalahan */
-/* 2. Jika 0 < n <= CAPACITY; Lakukan n kali: 
+/* 2. Jika 0 < n <= LSCAP; Lakukan n kali: 
           Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
 /*    Jika n = 0; hanya terbentuk List kosong */
 {
@@ -95,14 +95,14 @@ void readList(ListPos *l)
     do
     {
         scanf("%d", &n);
-    } while (n < 0 || n > CAPACITY);
+    } while (n < 0 || n > LSCAP);
 
     CreateListPos(l);
     if (n > 0)
     {
         for (i = 0; i < n; i++)
         {
-            scanf("%d", &ELMT(*l, i));
+            scanf("%d", &ELMTLS(*l, i));
         }
     }
 }
@@ -129,11 +129,11 @@ void displayList(ListPos l)
         {
             if (i == 0)
             {
-                printf("%d", ELMT(l, i));
+                printf("%d", ELMTLS(l, i));
             }
             else
             {
-                printf(",%d", ELMT(l, i));
+                printf(",%d", ELMTLS(l, i));
             }
         }
         printf("]");
@@ -157,7 +157,7 @@ ListPos plusMinusTab(ListPos l1, ListPos l2, boolean plus)
         int i;
         for (i = 0; i < length(l1); i++)
         {
-            ELMT(l, i) = ELMT(l1, i) + ELMT(l2, i);
+            ELMTLS(l, i) = ELMTLS(l1, i) + ELMTLS(l2, i);
         }
     }
     else
@@ -165,7 +165,7 @@ ListPos plusMinusTab(ListPos l1, ListPos l2, boolean plus)
         int i;
         for (i = 0; i < length(l1); i++)
         {
-            ELMT(l, i) = ELMT(l1, i) - ELMT(l2, i);
+            ELMTLS(l, i) = ELMTLS(l1, i) - ELMTLS(l2, i);
         }
     }
     return (l);
@@ -185,7 +185,7 @@ boolean isListEqual(ListPos l1, ListPos l2)
         i = 0;
         while (i < length(l1) && isEqual)
         {
-            if (ELMT(l1, i) == ELMT(l2, i))
+            if (ELMTLS(l1, i) == ELMTLS(l2, i))
             {
                 i++;
             }
@@ -206,7 +206,7 @@ boolean isListEqual(ListPos l1, ListPos l2)
 /* ***  Perhatian : List boleh kosong!! *** */
 int indexOf(ListPos l, ElType val)
 /* Search apakah ada elemen List l yang bernilai val */
-/* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
+/* Jika ada, menghasilkan indeks i terkecil, dengan ELMTLS(l,i) = val */
 /* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
 /* Skema Searching yang digunakan bebas */
 {
@@ -221,7 +221,7 @@ int indexOf(ListPos l, ElType val)
     {
         while (i < length(l) && notFound)
         {
-            if (ELMT(l, i) == val)
+            if (ELMTLS(l, i) == val)
             {
                 notFound = false;
             }
@@ -248,18 +248,18 @@ void extremes(ListPos l, ElType *max, ElType *min)
         Min berisi nilai terkecil dalam l */
 {
     int i;
-    *max = ELMT(l, 0);
-    *min = ELMT(l, 0);
+    *max = ELMTLS(l, 0);
+    *min = ELMTLS(l, 0);
 
     for (i = 1; i < length(l); i++)
     {
-        if (*max < ELMT(l, i))
+        if (*max < ELMTLS(l, i))
         {
-            *max = ELMT(l, i);
+            *max = ELMTLS(l, i);
         }
-        else if (*min > ELMT(l, i))
+        else if (*min > ELMTLS(l, i))
         {
-            *min = ELMT(l, i);
+            *min = ELMTLS(l, i);
         }
     }
 }
@@ -273,7 +273,7 @@ boolean isAllEven(ListPos l)
 
     while (i < length(l) && isEven)
     {
-        if (ELMT(l, i) % 2 != 0)
+        if (ELMTLS(l, i) % 2 != 0)
         {
             isEven = false;
         }
@@ -304,14 +304,14 @@ void sort(ListPos *l, boolean asc)
                 if (asc)
                 {
 
-                    if (ELMT(*l, index) > ELMT(*l, i))
+                    if (ELMTLS(*l, index) > ELMTLS(*l, i))
                     {
                         index = i;
                     }
                 }
                 else
                 {
-                    if (ELMT(*l, index) < ELMT(*l, i))
+                    if (ELMTLS(*l, index) < ELMTLS(*l, i))
                     {
                         index = i;
                     }
@@ -319,9 +319,9 @@ void sort(ListPos *l, boolean asc)
             }
             if (index != pass)
             {
-                temp = ELMT(*l, index);
-                ELMT(*l, index) = ELMT(*l, pass);
-                ELMT(*l, pass) = temp;
+                temp = ELMTLS(*l, index);
+                ELMTLS(*l, index) = ELMTLS(*l, pass);
+                ELMTLS(*l, pass) = temp;
             }
         }
     }
@@ -334,7 +334,7 @@ void insertLast(ListPos *l, ElType val)
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 {
-    ELMT(*l, length(*l)) = val;
+    ELMTLS(*l, length(*l)) = val;
 }
 
 /* ********** MENGHAPUS ELEMEN ********** */
@@ -345,6 +345,6 @@ void deleteLast(ListPos *l, ElType *val)
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
 {
-    *val = ELMT(*l, length(*l) - 1);
-    ELMT(*l, length(*l) - 1) = VAL_UNDEF;
+    *val = ELMTLS(*l, length(*l) - 1);
+    ELMTLS(*l, length(*l) - 1) = VAL_UNDEF;
 }

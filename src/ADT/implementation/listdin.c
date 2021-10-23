@@ -1,5 +1,3 @@
-
-#include "boolean.h"
 #include "../header/listdin.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -98,7 +96,7 @@ void readList(ListDin *l)
         NEFF(*l) = n;
         for (i = 0; i < n; i++)
         {
-            scanf("%d", &ELMT(*l, i));
+            scanf("%d", &ELMTLD(*l, i));
         }
     }
     else
@@ -129,11 +127,11 @@ void displayList(ListDin l)
         {
             if (i == 0)
             {
-                printf("%d", ELMT(l, i));
+                printf("%d", ELMTLD(l, i));
             }
             else
             {
-                printf(",%d", ELMT(l, i));
+                printf(",%d", ELMTLD(l, i));
             }
         }
         printf("]");
@@ -157,14 +155,14 @@ ListDin plusMinusList(ListDin l1, ListDin l2, boolean plus)
     {
         for (i = 0; i < length(l1); i++)
         {
-            ELMT(l, i) = ELMT(l1, i) + ELMT(l2, i);
+            ELMTLD(l, i) = ELMTLD(l1, i) + ELMTLD(l2, i);
         }
     }
     else
     {
         for (i = 0; i < length(l1); i++)
         {
-            ELMT(l, i) = ELMT(l1, i) - ELMT(l2, i);
+            ELMTLD(l, i) = ELMTLD(l1, i) - ELMTLD(l2, i);
         }
     }
     return (l);
@@ -183,7 +181,7 @@ boolean isListEqual(ListDin l1, ListDin l2)
         i = 0;
         while (i < length(l1) && isEqual)
         {
-            if (ELMT(l1, i) == ELMT(l2, i))
+            if (ELMTLD(l1, i) == ELMTLD(l2, i))
             {
                 i++;
             }
@@ -220,7 +218,7 @@ IdxType indexOf(ListDin l, ElType val)
     {
         while (i < length(l) && notFound)
         {
-            if (ELMT(l, i) == val)
+            if (ELMTLD(l, i) == val)
             {
                 notFound = false;
             }
@@ -247,18 +245,18 @@ void extremes(ListDin l, ElType *max, ElType *min)
         min berisi nilai minimum l */
 {
     int i;
-    *max = ELMT(l, 0);
-    *min = ELMT(l, 0);
+    *max = ELMTLD(l, 0);
+    *min = ELMTLD(l, 0);
 
     for (i = 1; i < length(l); i++)
     {
-        if (*max < ELMT(l, i))
+        if (*max < ELMTLD(l, i))
         {
-            *max = ELMT(l, i);
+            *max = ELMTLD(l, i);
         }
-        else if (*min > ELMT(l, i))
+        else if (*min > ELMTLD(l, i))
         {
-            *min = ELMT(l, i);
+            *min = ELMTLD(l, i);
         }
     }
 }
@@ -276,7 +274,7 @@ void copyList(ListDin lIn, ListDin *lOut)
 
     for (i = 0; i < length(lIn); i++)
     {
-        ELMT(*lOut, i) = ELMT(lIn, i);
+        ELMTLD(*lOut, i) = ELMTLD(lIn, i);
     }
 }
 
@@ -289,7 +287,7 @@ ElType sumList(ListDin l)
 
     for (i = 0; i < length(l); i++)
     {
-        sum += ELMT(l, i);
+        sum += ELMTLD(l, i);
     }
     return sum;
 }
@@ -303,7 +301,7 @@ int countVal(ListDin l, ElType val)
 
     for (i = 0; i < length(l); i++)
     {
-        if (ELMT(l, i) == val)
+        if (ELMTLD(l, i) == val)
         {
             count += 1;
         }
@@ -319,7 +317,7 @@ boolean isAllEven(ListDin l)
 
     while (i < length(l) && isEven)
     {
-        if (ELMT(l, i) % 2 != 0)
+        if (ELMTLD(l, i) % 2 != 0)
         {
             isEven = false;
         }
@@ -350,14 +348,14 @@ void sort(ListDin *l, boolean asc)
                 if (asc)
                 {
 
-                    if (ELMT(*l, index) > ELMT(*l, i))
+                    if (ELMTLD(*l, index) > ELMTLD(*l, i))
                     {
                         index = i;
                     }
                 }
                 else
                 {
-                    if (ELMT(*l, index) < ELMT(*l, i))
+                    if (ELMTLD(*l, index) < ELMTLD(*l, i))
                     {
                         index = i;
                     }
@@ -365,9 +363,9 @@ void sort(ListDin *l, boolean asc)
             }
             if (index != pass)
             {
-                temp = ELMT(*l, index);
-                ELMT(*l, index) = ELMT(*l, pass);
-                ELMT(*l, pass) = temp;
+                temp = ELMTLD(*l, index);
+                ELMTLD(*l, index) = ELMTLD(*l, pass);
+                ELMTLD(*l, pass) = temp;
             }
         }
     }
@@ -380,7 +378,7 @@ void insertLast(ListDin *l, ElType val)
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 {
-    ELMT(*l, length(*l)) = val;
+    ELMTLD(*l, length(*l)) = val;
     NEFF(*l) += 1;
 }
 
@@ -392,7 +390,7 @@ void deleteLast(ListDin *l, ElType *val)
 /*      Banyaknya elemen list berkurang satu */
 /*      List l mungkin menjadi kosong */
 {
-    *val = ELMT(*l, (length(*l) - 1));
+    *val = ELMTLD(*l, (length(*l) - 1));
     NEFF(*l) -= 1;
 }
 
