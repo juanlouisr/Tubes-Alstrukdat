@@ -6,10 +6,11 @@
 
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk POINT *** */
-POINT MakePOINT(float X, float Y)
+POINT MakePOINT(char N, float X, float Y)
 /* Membentuk sebuah POINT dari komponen-komponennya */
 {
     POINT P;
+    Name(P) = N;
     Absis(P) = X;
     Ordinat(P) = Y;
     return (P);
@@ -25,10 +26,12 @@ void BacaPOINT(POINT *P)
 /* I.S. Sembarang */
 /* F.S. P terdefinisi */
 {
+    char n;
     float x, y;
+    scanf("%c", &n);
     scanf("%f", &x);
     scanf("%f", &y);
-    *P = MakePOINT(x, y);
+    *P = MakePOINT(n, x, y);
 }
 
 void TulisPOINT(POINT P)
@@ -40,7 +43,7 @@ void TulisPOINT(POINT P)
 /* I.S. P terdefinisi */
 /* F.S. P tertulis di layar dengan format "(X,Y)" */
 {
-    printf("(%.2f,%.2f)", Absis(P), Ordinat(P));
+    printf("%c (%.2f,%.2f)", Name(P), Absis(P), Ordinat(P));
 }
 
 /* *** Kelompok operasi relasional terhadap POINT *** */
