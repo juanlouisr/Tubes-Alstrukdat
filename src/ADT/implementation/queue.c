@@ -15,23 +15,23 @@ void CreateQueue(Queue *q)
 }
 
 /* ********* Prototype ********* */
-boolean isEmpty(Queue q)
+boolean isEmptyQ(Queue q)
 /* Mengirim true jika q kosong: lihat definisi di atas */
 {
     return (IDX_HEAD(q) == IDX_UNDEF && IDX_TAIL(q) == IDX_UNDEF);
 }
 
-boolean isFull(Queue q)
+boolean isFullQ(Queue q)
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu jika index head bernilai 0 dan index tail bernilai QUEUECAP-1 */
 {
     return (IDX_HEAD(q) == 0 && IDX_TAIL(q) == (QUEUECAP - 1));
 }
 
-int length(Queue q)
+int lengthQ(Queue q)
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 {
-    return (isEmpty(q) ? 0 : (IDX_TAIL(q) - IDX_HEAD(q)) + 1);
+    return (isEmptyQ(q) ? 0 : (IDX_TAIL(q) - IDX_HEAD(q)) + 1);
 }
 
 /* *** Primitif Add/Delete *** */
@@ -42,7 +42,7 @@ void enqueue(Queue *q, ElType val)
         Jika q penuh semu, maka perlu dilakukan aksi penggeseran "maju" elemen-elemen q
         menjadi rata kiri untuk membuat ruang kosong bagi TAIL baru  */
 {
-    if (isEmpty(*q))
+    if (isEmptyQ(*q))
     {
         IDX_HEAD(*q) = 0;
         IDX_TAIL(*q) = 0;
@@ -94,7 +94,7 @@ void displayQueue(Queue q)
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika Queue kosong : menulis [] */
 {
-    if (isEmpty(q))
+    if (isEmptyQ(q))
     {
         printf("[]");
     }

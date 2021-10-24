@@ -15,7 +15,7 @@ void CreateMatrix(int nRow, int nCol, Matrix *m)
 }
 
 /* *** Selektor "DUNIA Matrix" *** */
-boolean isIdxValid(int i, int j)
+boolean isIdxValidMat(int i, int j)
 /* Mengirimkan true jika i, j adalah Index yang valid untuk matriks apa pun */
 {
    return ((i >= 0 && i < ROW_CAP) && (j >= 0 && j < COL_CAP));
@@ -34,7 +34,7 @@ Index getLastIdxCol(Matrix m)
    return (COLS(m) - 1);
 }
 
-boolean isIdxEff(Matrix m, Index i, Index j)
+boolean isIdxEffMat(Matrix m, Index i, Index j)
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
 {
    return ((i >= 0 && i < ROWS(m)) && (j >= 0 && j < COLS(m)));
@@ -205,14 +205,14 @@ void pMultiplyConst(Matrix *m, ElType k)
 }
 
 /* ********** KELOMPOK OPERASI RELASIONAL TERHADAP Matrix ********** */
-boolean isEqual(Matrix m1, Matrix m2)
+boolean isEqualMat(Matrix m1, Matrix m2)
 /* Mengirimkan true jika m1 = m2, yaitu count(m1) = count(m2) dan */
 /* untuk setiap i,j yang merupakan Index baris dan kolom m1(i,j) = m2(i,j) */
 /* Juga merupakan strong eq karena getLastIdxCol(m1) = getLastIdxCol(m2) */
 {
    boolean equal = true;
 
-   if (count(m1) == count(m2))
+   if (countMat(m1) == countMat(m2))
    {
       int i, j;
       i = 0;
@@ -240,20 +240,20 @@ boolean isEqual(Matrix m1, Matrix m2)
    return equal;
 }
 
-boolean isNotEqual(Matrix m1, Matrix m2)
+boolean isNotEqualMat(Matrix m1, Matrix m2)
 /* Mengirimkan true jika m1 tidak sama dengan m2 */
 {
-   return (!isEqual(m1, m2));
+   return (!isEqualMat(m1, m2));
 }
 
-boolean isSizeEqual(Matrix m1, Matrix m2)
+boolean isSizeEqualMat(Matrix m1, Matrix m2)
 /* Mengirimkan true jika ukuran efektif matriks m1 sama dengan ukuran efektif m2 */
 {
    return ((ROWS(m1) == ROWS(m2)) && (COLS(m1) == COLS(m2)));
 }
 
 /* ********** Operasi lain ********** */
-int count(Matrix m)
+int countMat(Matrix m)
 /* Mengirimkan banyaknya elemen m */
 {
    return (ROWS(m) * COLS(m));
@@ -358,7 +358,7 @@ boolean isSparse(Matrix m)
          }
       }
    }
-   return (counter <= (0.05 * (count(m))));
+   return (counter <= (0.05 * (countMat(m))));
 }
 
 Matrix inverse1(Matrix m)

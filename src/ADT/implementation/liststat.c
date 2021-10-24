@@ -4,10 +4,7 @@
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
-void CreateListPos(ListPos *l)
-/* I.S. l sembarang */
-/* F.S. Terbentuk List l kosong dengan kapasitas LSCAP */
-/* Proses: Inisialisasi semua elemen List l dengan VAL_UNDEF */
+void CreateListStat(ListPos *l)
 {
     int i;
     for (i = 0; i < LSCAP; i++)
@@ -18,13 +15,11 @@ void CreateListPos(ListPos *l)
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int length(ListPos l)
-/* Mengirimkan banyaknya elemen efektif List */
-/* Mengirimkan nol jika List kosong */
+int lengthListStat(ListPos l)
 {
     boolean notMark = true;
     int i = 0;
-    if (isEmpty(l))
+    if (isEmptyListStat(l))
     {
         return 0;
     }
@@ -46,47 +41,32 @@ int length(ListPos l)
 }
 
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValid(ListPos l, int i)
-/* Mengirimkan true jika i adalah indeks yang valid utk kapasitas List l */
-/* yaitu antara indeks yang terdefinisi utk container*/
+boolean isIdxValidListStat(ListPos l, int i)
 {
     return (i > IDX_UNDEF && i < LSCAP);
 }
 
-boolean isIdxEff(ListPos l, int i)
-/* Mengirimkan true jika i adalah indeks yang terdefinisi utk List l */
-/* yaitu antara 0..length(l)-1 */
+boolean isIdxEffListStat(ListPos l, int i)
 {
-    return (i > IDX_UNDEF && i < length(l));
+    return (i > IDX_UNDEF && i < lengthListStat(l));
 }
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */
-boolean isEmpty(ListPos l)
-/* Mengirimkan true jika List l kosong, mengirimkan false jika tidak */
+boolean isEmptyListStat(ListPos l)
 {
     return (ELMTLS(l, 0) == VAL_UNDEF);
 }
 
 /* *** Test List penuh *** */
-boolean isFull(ListPos l)
-/* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
+boolean isFullListStat(ListPos l)
 {
     return (ELMTLS(l, LSCAP - 1) != VAL_UNDEF);
 }
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi List dari pembacaan *** */
-void readList(ListPos *l)
-/* I.S. l sembarang */
-/* F.S. List l terdefinisi */
-/* Proses: membaca banyaknya elemen l dan mengisi nilainya */
-/* 1. Baca banyaknya elemen diakhiri enter, misalnya n */
-/*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= LSCAP */
-/*    Jika n tidak valid, tidak diberikan pesan kesalahan */
-/* 2. Jika 0 < n <= LSCAP; Lakukan n kali: 
-          Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
-/*    Jika n = 0; hanya terbentuk List kosong */
+void readListStat(ListPos *l)
 {
     int n;
     int i;
@@ -97,7 +77,7 @@ void readList(ListPos *l)
         scanf("%d", &n);
     } while (n < 0 || n > LSCAP);
 
-    CreateListPos(l);
+    CreateListStat(l);
     if (n > 0)
     {
         for (i = 0; i < n; i++)
@@ -107,25 +87,18 @@ void readList(ListPos *l)
     }
 }
 
-void displayList(ListPos l)
-/* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
-   siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
-   karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
-/* I.S. l boleh kosong */
-/* F.S. Jika l tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika List kosong : menulis [] */
+void displayListStat(ListPos l)
 {
     int i;
 
-    if (isEmpty(l))
+    if (isEmptyListStat(l))
     {
         printf("[]");
     }
     else
     {
         printf("[");
-        for (i = 0; i < length(l); i++)
+        for (i = 0; i < lengthListStat(l); i++)
         {
             if (i == 0)
             {
@@ -142,20 +115,15 @@ void displayList(ListPos l)
 
 /* ********** OPERATOR ARITMATIKA ********** */
 /* *** Aritmatika List : Penjumlahan, pengurangan, perkalian, ... *** */
-ListPos plusMinusTab(ListPos l1, ListPos l2, boolean plus)
-/* Prekondisi : l1 dan l2 berukuran sama dan tidak kosong */
-/* Jika plus = true, mengirimkan  l1+l2, yaitu setiap elemen l1 dan l2 pada 
-       indeks yang sama dijumlahkan */
-/* Jika plus = false, mengirimkan l1-l2, yaitu setiap elemen l1 dikurangi 
-       elemen l2 pada indeks yang sama */
+ListPos plusMinusListStat(ListPos l1, ListPos l2, boolean plus)
 {
     ListPos l;
 
-    CreateListPos(&l);
+    CreateListStat(&l);
     if (plus)
     {
         int i;
-        for (i = 0; i < length(l1); i++)
+        for (i = 0; i < lengthListStat(l1); i++)
         {
             ELMTLS(l, i) = ELMTLS(l1, i) + ELMTLS(l2, i);
         }
@@ -163,7 +131,7 @@ ListPos plusMinusTab(ListPos l1, ListPos l2, boolean plus)
     else
     {
         int i;
-        for (i = 0; i < length(l1); i++)
+        for (i = 0; i < lengthListStat(l1); i++)
         {
             ELMTLS(l, i) = ELMTLS(l1, i) - ELMTLS(l2, i);
         }
@@ -173,17 +141,15 @@ ListPos plusMinusTab(ListPos l1, ListPos l2, boolean plus)
 
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan List: *** */
-boolean isListEqual(ListPos l1, ListPos l2)
-/* Mengirimkan true jika l1 sama dengan l2 yaitu jika ukuran l1 = l2 dan semua 
-   elemennya sama */
+boolean isListStatEqual(ListPos l1, ListPos l2)
 {
     int i;
     boolean isEqual = true;
 
-    if (length(l1) == length(l2))
+    if (lengthListStat(l1) == lengthListStat(l2))
     {
         i = 0;
-        while (i < length(l1) && isEqual)
+        while (i < lengthListStat(l1) && isEqual)
         {
             if (ELMTLS(l1, i) == ELMTLS(l2, i))
             {
@@ -204,22 +170,18 @@ boolean isListEqual(ListPos l1, ListPos l2)
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : List boleh kosong!! *** */
-int indexOf(ListPos l, ElType val)
-/* Search apakah ada elemen List l yang bernilai val */
-/* Jika ada, menghasilkan indeks i terkecil, dengan ELMTLS(l,i) = val */
-/* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
-/* Skema Searching yang digunakan bebas */
+int indexOfListStat(ListPos l, ElType val)
 {
     int i = 0;
     boolean notFound = true;
 
-    if (isEmpty(l))
+    if (isEmptyListStat(l))
     {
         return IDX_UNDEF;
     }
     else
     {
-        while (i < length(l) && notFound)
+        while (i < lengthListStat(l) && notFound)
         {
             if (ELMTLS(l, i) == val)
             {
@@ -242,16 +204,13 @@ int indexOf(ListPos l, ElType val)
 }
 
 /* ********** NILAI EKSTREM ********** */
-void extremes(ListPos l, ElType *max, ElType *min)
-/* I.S. List l tidak kosong */
-/* F.S. Max berisi nilai terbesar dalam l;
-        Min berisi nilai terkecil dalam l */
+void extremesListStat(ListPos l, ElType *max, ElType *min)
 {
     int i;
     *max = ELMTLS(l, 0);
     *min = ELMTLS(l, 0);
 
-    for (i = 1; i < length(l); i++)
+    for (i = 1; i < lengthListStat(l); i++)
     {
         if (*max < ELMTLS(l, i))
         {
@@ -265,13 +224,12 @@ void extremes(ListPos l, ElType *max, ElType *min)
 }
 
 /* ********** OPERASI LAIN ********** */
-boolean isAllEven(ListPos l)
-/* Menghailkan true jika semua elemen l genap */
+boolean isAllEvenListStat(ListPos l)
 {
     int i;
     boolean isEven = true;
 
-    while (i < length(l) && isEven)
+    while (i < lengthListStat(l) && isEven)
     {
         if (ELMTLS(l, i) % 2 != 0)
         {
@@ -286,20 +244,15 @@ boolean isAllEven(ListPos l)
 }
 
 /* ********** SORTING ********** */
-void sort(ListPos *l, boolean asc)
-/* I.S. l boleh kosong */
-/* F.S. Jika asc = true, l terurut membesar */
-/*      Jika asc = false, l terurut mengecil */
-/* Proses : Mengurutkan l dengan salah satu algoritma sorting,
-   algoritma bebas */
+void sortListStat(ListPos *l, boolean asc)
 {
     int i, pass, temp, index;
-    if (length(*l) > 1)
+    if (lengthListStat(*l) > 1)
     {
-        for (pass = 0; pass < length(*l); pass++)
+        for (pass = 0; pass < lengthListStat(*l); pass++)
         {
             index = pass;
-            for (i = pass + 1; i < length(*l); i++)
+            for (i = pass + 1; i < lengthListStat(*l); i++)
             {
                 if (asc)
                 {
@@ -329,22 +282,14 @@ void sort(ListPos *l, boolean asc)
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(ListPos *l, ElType val)
-/* Proses: Menambahkan val sebagai elemen terakhir List */
-/* I.S. List l boleh kosong, tetapi tidak penuh */
-/* F.S. val adalah elemen terakhir l yang baru */
+void insertLastListStat(ListPos *l, ElType val)
 {
-    ELMTLS(*l, length(*l)) = val;
+    ELMTLS(*l, lengthListStat(*l)) = val;
 }
 
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLast(ListPos *l, ElType *val)
-/* Proses : Menghapus elemen terakhir List */
-/* I.S. List tidak kosong */
-/* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
-/*      Banyaknya elemen List berkurang satu */
-/*      List l mungkin menjadi kosong */
+void deleteLastListStat(ListPos *l, ElType *val)
 {
-    *val = ELMTLS(*l, length(*l) - 1);
-    ELMTLS(*l, length(*l) - 1) = VAL_UNDEF;
+    *val = ELMTLS(*l, lengthListStat(*l) - 1);
+    ELMTLS(*l, lengthListStat(*l) - 1) = VAL_UNDEF;
 }
