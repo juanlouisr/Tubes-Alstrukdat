@@ -8,18 +8,19 @@
 #include "boolean.h"
 
 #define IDX_UNDEF -1
-#define TASCAP 100
+#define TASCAP 3
 
 typedef int ElType;
-typedef struct {
+typedef struct
+{
   ElType buffer[TASCAP]; /* tabel penyimpan elemen */
-  int idxTop;              /* alamat TOP: elemen puncak */
+  int idxTop;            /* alamat TOP: elemen puncak */
 } Stack;
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika s adalah Stack, maka akses elemen : */
 #define IDX_TOP(s) (s).idxTop
-#define     TOP(s) (s).buffer[(s).idxTop]
+#define TOP(s) (s).buffer[(s).idxTop]
 
 /* *** Konstruktor/Kreator *** */
 void CreateStack(Stack *s);
