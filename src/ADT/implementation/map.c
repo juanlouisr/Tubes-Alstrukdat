@@ -41,24 +41,24 @@ boolean isIdxMapEff(MAP m,int i,int j){
     return (i>0&&i<=ROW(m))&&(j>0&&j<=COL(m));
 };
 
-int main(void){
-    MAP M1;
-    DaftarLokasi DL;
-    CreateDaftarLokasi(&DL,17);
-    int i;
-    char b;
-    int x,y;
-    LOKASI P;
-    for(i=0;i<17;i++){
-        scanf(" %c",&b);
-        scanf("%d",&x);
-        scanf("%d",&y);
-        P = MakeLOKASI(b,x,y,'b');
-        insertLast(&DL,P);
-    }   
-    alokasiMAP(&M1,10,15,DL);
-    mapBuilding(&M1);
-    displayMAP(M1);
-    return 0;
-}
+// int main(void){
+//     MAP M1;
+//     DaftarLokasi DL;
+//     CreateDaftarLokasi(&DL,17);
+//     int i;
+//     char b;
+//     int x,y;
+//     LOKASI P;
+//     for(i=0;i<17;i++){
+//         scanf(" %c",&b);
+//         scanf("%d",&x);
+//         scanf("%d",&y);
+//         P = MakeLOKASI(b,x,y,'b');
+//         insertLast(&DL,P);
+//     }   
+//     alokasiMAP(&M1,10,15,DL);
+//     mapBuilding(&M1);
+//     displayMAP(M1);
+//     return 0;
+// }
 //Display map
