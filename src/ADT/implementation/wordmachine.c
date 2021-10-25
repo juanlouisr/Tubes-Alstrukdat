@@ -15,13 +15,13 @@ void ignoreBlank()
     }
 }
 
-void startWord()
+void startWord(FILE* file)
 /* I.S. : currentChar sembarang 
    F.S. : endWord = true, dan currentChar = MARK; 
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 {
-    start();
+    start(file);
     ignoreBlank();
     if (currentChar == MARK)
     {
@@ -74,4 +74,50 @@ void copyWord()
         adv();
     }
     currentWord.length = i;
+}
+
+int getStrLength(const char* str)
+/* mengembalikan panjang str, mengembalikan
+   0 jika string kosong */
+{
+    int size = 0;
+    while (*str)
+    {
+        size++;
+        str++;
+    }
+    return size;
+} 
+
+boolean isWordEQ(Word word, const char* str)
+/* mengembalikan true jika kata dengan string sama
+   0 jika string kosong */
+{
+    if (word.length != getStrLength(str))
+    {
+        return false;
+    }
+    else
+    {
+        int i = word.length;
+        boolean equal = true;
+        while (i && equal) 
+        {
+            if (word.contents[i-1] != str[i-1])
+            {
+                equal = false;
+            }
+            i--;
+        }
+        return equal;
+    }
+}
+
+void wordToStr(Word word, char* str)
+{
+    for (int i = 0; i < word.length; i++)
+    {
+        str[i] = word.contents[i];
+    }
+    str[word.length] = '\0';
 }

@@ -24,7 +24,7 @@ void ignoreBlank();
    I.S. : currentChar sembarang 
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
-void startWord();
+void startWord(FILE* file);
 /* I.S. : currentChar sembarang 
    F.S. : endWord = true, dan currentChar = MARK; 
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
@@ -44,5 +44,15 @@ void copyWord();
           currentChar = BLANK atau currentChar = MARK; 
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
+
+int getStrLength(const char* str);
+/* mengembalikan panjang str, mengembalikan
+   0 jika string kosong */
+
+boolean isWordEQ(Word word, const char* str);
+/* mengembalikan true jika kata dengan string sama
+   0 jika string kosong */
+
+void wordToStr(Word word, char* str);
 
 #endif

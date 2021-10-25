@@ -4,14 +4,15 @@
 #ifndef CHAR_ENGINE_H
 #define CHAR_ENGINE_H
 
+#include <stdio.h>
 #include "boolean.h"
 
-#define MARK '.'
+#define MARK '\n'
 /* Char Engine State */
 extern char currentChar;
 extern boolean eot;
 
-void start();
+void start(FILE* file);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
