@@ -30,13 +30,10 @@ void clearConsole()
 char getCharInputStream(FILE* file)
 {
     start(file);
-    while (currentChar == BLANK)
-    {
-        adv();
-    }
+    ignoreBlank();
     if (currentChar == MARK)
     {
-        return getCharSTDIN();
+        return getCharInputStream(file);
     }
     else
     {
@@ -52,13 +49,10 @@ char getCharSTDIN()
 Word getWordInputStream(FILE* file)
 {
     start(file);
-    while (currentChar == BLANK)
-    {
-        adv();
-    }
+    ignoreBlank();
     if (currentChar == MARK)
     {
-        return getWordSTDIN();
+        return getWordInputStream(file);
     }
     else
     {
