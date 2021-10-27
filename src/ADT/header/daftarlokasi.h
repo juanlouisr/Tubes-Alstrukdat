@@ -4,8 +4,8 @@
 /* Versi II : dengan banyaknya elemen didefinisikan secara eksplisit,
    memori list dinamik */
 
-#ifndef DAFTARLOKASI2_H
-#define DAFTARLOKASI2_H
+#ifndef DAFTARLOKASI_H
+#define DAFTARLOKASI_H
 
 #include "boolean.h"
 #include "lokasi.h"

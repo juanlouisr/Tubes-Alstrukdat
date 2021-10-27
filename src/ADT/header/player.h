@@ -1,8 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "boolean.h"
-#include "../../adtlib.h"
 
+#include "lokasi.h"
+#include "map.h"
 typedef struct {
     LOKASI loc;
     int uang;
@@ -10,5 +10,11 @@ typedef struct {
 #define pLoc(p) (p).loc
 
 void createPlayer(PLAYER *p,LOKASI lokAwal);
+/*Membuat player baru dengan
+    lokasi = lokAwal
 
+*/
+/*
+void movePlayer(MAP m, PLAYER *p,int opt);
+//Memindahkan player ke lok*/
 #endif

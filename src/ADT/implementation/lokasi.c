@@ -25,7 +25,7 @@ void TulisLOKASI(LOKASI P)
 /* I.S. P terdefinisi */
 /* F.S. P tertulis di layar dengan format "(X,Y)" */
 {
-    printf("%c (%d,%d)",NAMA(P), Absis(P), Ordinat(P));
+    printf("%c (%d,%d)\n",NAMA(P), Absis(P), Ordinat(P));
 }
 
 /* *** Kelompok operasi relasional terhadap LOKASI *** */

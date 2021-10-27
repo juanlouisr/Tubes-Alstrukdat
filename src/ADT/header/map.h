@@ -1,17 +1,16 @@
 #ifndef MAP_H
 #define MAP_H
-
-#include "boolean.h"
-#include "daftarlokasi.h"
 #include "player.h"
-#include "../originaladt/listdin.h"
-#include "../../adtlib.h"
+#include "lokasi.h"
+#include "daftarlokasi.h"
+
 typedef struct {
    DaftarLokasi daftarlok ; /* Nama bangunan */ 
    char map[22][32];
    int row;
    int col;
    char adjacency[27][27];
+   DaftarLokasi reachable;
 } MAP;
 #define ROW(M) (M).row
 #define COL(M) (M).col
@@ -20,7 +19,9 @@ typedef struct {
 #define ELMTY(M,i) (M).daftarlok.buffer[(i)].Y
 #define ELMTTP(M,i) (M).daftarlok.buffer[(i)].jenis
 #define ELMTM(M,i,j) (M).map[(i)][(j)]
+#define REACH(M) (M).reachable
 #define nEffBuilding(M) (M).daftarlok.nEff
+#define neffReach(m) (m).reachable.nEff
 #define ELMTADJ(M,i,j) (M).adjacency[(i)][(j)]
 #define LOK(M,i) (M).daftarlok.buffer[(i)]
 
@@ -50,4 +51,7 @@ char getBuilding(MAP m,int x,int y);
 
 int getIdxBld(char c);
 //Mengembalikan index bangunan di daftar lokasi
+
+void displayReachable(MAP m);
+//Menuliskan tempat yang bisa dicapai
 #endif

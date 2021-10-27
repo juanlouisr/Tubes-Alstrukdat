@@ -45,6 +45,12 @@ int main()
             getAdjacent(&M1,file);
             updateStatus(&M1,P1);
             displayMAP(M1);
+            printf("\n");
+            displayReachable(M1);
+            printf("\n\n");
+            movePlayer(M1,&P1,2);
+            displayMAP(M1);
+            displayReachable(M1);
             
         }
         else if (isWordEQ(word, "2"))

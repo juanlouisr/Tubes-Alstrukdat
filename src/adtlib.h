@@ -1,18 +1,18 @@
 #ifndef __ADT_UTIL__
 #define __ADT_UTIL__
 
-#include "adt/header/boolean.h"
-#include "adt/header/charmachine.h"
-// #include "adt/header/listdin.h"
-// #include "adt/header/liststat.h"
-// #include "adt/header/matrix.h"
-// #include "adt/header/point.h"
-// #include "adt/header/queue.h"
-// #include "adt/header/stack.h"
-#include "adt/header/lokasi.h"
-#include "adt/header/daftarlokasi.h"
-#include "adt/header/map.h"
-#include "adt/header/player.h"
-#include "adt/header/wordmachine.h"
+#include "ADT/header/boolean.h"
+#include "ADT/header/charmachine.h"
+// #include "ADT/header/listdin.h"
+// #include "ADT/header/liststat.h"
+// #include "ADT/header/matrix.h"
+// #include "ADT/header/point.h"
+// #include "ADT/header/queue.h"
+// #include "ADT/header/stack.h"
+#include "ADT/header/lokasi.h"
+#include "ADT/header/daftarlokasi.h"
+#include "ADT/header/map.h"
+#include "ADT/header/player.h"
+#include "ADT/header/wordmachine.h"
 
 #endif

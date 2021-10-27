@@ -3,6 +3,7 @@
 #include "../header/map.h"
 #include "../../utillib.h"
 
+
 void alokasiMAP(MAP *m,int row, int col,DaftarLokasi lok){
     (*m).daftarlok = lok;
     ROW(*m) = row;
@@ -50,11 +51,14 @@ void updateStatus(MAP *m,PLAYER p){
     int i;
     int idx;
     char c;
+    free(&REACH(*m));
+    CreateDaftarLokasi(&REACH(*m),nEffBuilding(*m));
     c = getBuilding(*m,Absis(pLoc(p)),Ordinat(pLoc(p)));
     idx = getIdxBld(c);
     for(i=0;i<nEffBuilding(*m);i++){
         if(ELMTADJ(*m,idx,i) == '1'){
             ELMTTP(*m,i) = 'r';
+            insertLast(&REACH(*m),LOK(*m,i));
         } 
     }
     ELMTTP(*m,idx) = 'm';
@@ -84,6 +88,15 @@ void displayMAP(MAP m){
             
         }
         printf("\n");
+    }
+};
+
+void displayReachable(MAP m){
+    int i;
+    printf("Tempat yang bisa dicapai: \n");
+    for(i=0;i<neffReach(m);i++){
+        printf("%d. ",i+1);
+        TulisLOKASI(ELMTLD(REACH(m),i));
     }
 };
 
