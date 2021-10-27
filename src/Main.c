@@ -15,27 +15,33 @@ int main()
         if (isWordEQ(word, "1"))
         {
             printf("NEW GAME!\n");
-                int row = getIntInputStream(file);
+            int row = getIntInputStream(file);
             int col = getIntInputStream(file);
             printf("row : %d, col : %d\n", row, col);
-            int jmlBangunan = getIntInputStream(file);
-
-            MAP M1;
-            DaftarLokasi DL;
-            CreateDaftarLokasi(&DL, jmlBangunan);
-            int i;
             char b;
             int x,y;
             LOKASI P;
+            MAP M1;
+            DaftarLokasi DL;
+            int i,j;
+
+            x = getIntInputStream(file);
+            y = getIntInputStream(file);
+            P = MakeLOKASI('8',x,y,'h');
+            int jmlBangunan = getIntInputStream(file);
+            CreateDaftarLokasi(&DL, jmlBangunan+1);
+            insertLast(&DL,P);
+            
             for(i=0;i<jmlBangunan;i++){
                 b = getCharInputStream(file);
                 x = getIntInputStream(file);
                 y = getIntInputStream(file);
                 P = MakeLOKASI(b,x,y,'b');
                 insertLast(&DL,P);
-            }   
-            alokasiMAP(&M1,10,15,DL);
+            }
+            alokasiMAP(&M1,row,col,DL);
             mapBuilding(&M1);
+            getAdjacent(&M1,file);
             displayMAP(M1);
             
         }

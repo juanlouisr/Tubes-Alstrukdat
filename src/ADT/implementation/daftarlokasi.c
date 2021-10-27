@@ -8,12 +8,12 @@ void CreateDaftarLokasi(DaftarLokasi *l, int capacity)
 /* I.S. l sembarang, capacity > 0 */
 /* F.S. Terbentuk list dinamis l kosong dengan kapasitas capacity */
 {
-    BUFFER(*l) = (ElType *)malloc(capacity * sizeof(ElType));
+    BUFFER(*l) = (ElTypeDL *)malloc(capacity * sizeof(ElTypeDL));
     NEFF(*l) = 0;
     CAPACITY(*l) = capacity;
 }
 
-void dealocate(DaftarLokasi *l)
+void dealocateDL(DaftarLokasi *l)
 /* I.S. l terdefinisi; */
 /* F.S. (l) dikembalikan ke system, CAPACITY(l)=0; NEFF(l)=0 */
 {
@@ -139,7 +139,6 @@ void displayList(DaftarLokasi l)
 }
 
 
-
 /* ********** OPERASI LAIN ********** */
 void copyList(DaftarLokasi lIn, DaftarLokasi *lOut)
 /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
@@ -157,10 +156,9 @@ void copyList(DaftarLokasi lIn, DaftarLokasi *lOut)
     }
 }
 
-
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(DaftarLokasi *l, ElType val)
+void insertLast(DaftarLokasi *l, ElTypeDL val)
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
@@ -170,7 +168,7 @@ void insertLast(DaftarLokasi *l, ElType val)
 }
 
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLast(DaftarLokasi *l, ElType *val)
+void deleteLast(DaftarLokasi *l, ElTypeDL *val)
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
@@ -205,5 +203,6 @@ void compactList(DaftarLokasi *l)
 {
     CAPACITY(*l) = NEFF(*l);
 }
+
 
 

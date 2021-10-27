@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "../header/map.h"
+#include "../../utillib.h"
 
 void alokasiMAP(MAP *m,int row, int col,DaftarLokasi lok){
     (*m).daftarlok = lok;
@@ -40,6 +42,17 @@ void displayMAP(MAP m){
 boolean isIdxMapEff(MAP m,int i,int j){
     return (i>0&&i<=ROW(m))&&(j>0&&j<=COL(m));
 };
+
+void getAdjacent(MAP *m,FILE *file){
+    int i,j;
+    for(i=0;i<nEffBuilding(*m);i++){
+        for(j=0;j<nEffBuilding(*m);j++){
+            ELMTADJ(*m,i,j) = getCharInputStream(file);
+        }
+    }
+};
+
+
 
 // int main(void){
 //     MAP M1;

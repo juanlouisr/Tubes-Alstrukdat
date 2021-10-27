@@ -1,4 +1,4 @@
-#include "../header/listdin.h"
+#include "listdin.h"
 #include <stdio.h>
 #include <stdlib.h>
 
