@@ -12,6 +12,7 @@
 #include "adt/header/lokasi.h"
 #include "adt/header/daftarlokasi.h"
 #include "adt/header/map.h"
+#include "adt/header/player.h"
 #include "adt/header/wordmachine.h"
 
 #endif

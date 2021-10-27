@@ -24,14 +24,15 @@ int main()
             MAP M1;
             DaftarLokasi DL;
             int i,j;
-
+            PLAYER P1;
             x = getIntInputStream(file);
             y = getIntInputStream(file);
             P = MakeLOKASI('8',x,y,'h');
             int jmlBangunan = getIntInputStream(file);
             CreateDaftarLokasi(&DL, jmlBangunan+1);
             insertLast(&DL,P);
-            
+            createPlayer(&P1,ELMTLD(DL,0));
+            printf("%d,%d\n",Absis(pLoc(P1)),Ordinat(pLoc(P1)));
             for(i=0;i<jmlBangunan;i++){
                 b = getCharInputStream(file);
                 x = getIntInputStream(file);
@@ -42,6 +43,7 @@ int main()
             alokasiMAP(&M1,row,col,DL);
             mapBuilding(&M1);
             getAdjacent(&M1,file);
+            updateStatus(&M1,P1);
             displayMAP(M1);
             
         }

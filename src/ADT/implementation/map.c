@@ -29,11 +29,59 @@ void mapBuilding(MAP *m){
 };
 //Memasukan lokasi building
 
+char getBuilding(MAP m,int x,int y){
+    int i;
+    for(i=0;i<nEffBuilding(m);i++){
+        if(ELMTX(m,i) == x && ELMTY(m,i) == y){
+            return ELMTBLD(m,i);
+        };
+    }
+};
+
+int getIdxBld(char c){
+    if(c == '8'){
+        return 0;
+    }else{
+        return (int)c%64;
+    }
+};
+
+void updateStatus(MAP *m,PLAYER p){
+    int i;
+    int idx;
+    char c;
+    c = getBuilding(*m,Absis(pLoc(p)),Ordinat(pLoc(p)));
+    idx = getIdxBld(c);
+    for(i=0;i<nEffBuilding(*m);i++){
+        if(ELMTADJ(*m,idx,i) == '1'){
+            ELMTTP(*m,i) = 'r';
+        } 
+    }
+    ELMTTP(*m,idx) = 'm';
+}
+
 void displayMAP(MAP m){
     int i,j;
     for(i=0;i<ROW(m)+2;i++){
         for(j=0;j<COL(m)+2;j++){
-            printf("%c",ELMTM(m,i,j));
+            if(ELMTM(m,i,j) != '*' && ELMTM(m,i,j) != ' '){
+                int idx;
+                idx = getIdxBld(ELMTM(m,i,j));
+                if(ELMTTP(m,idx) == 'm'){
+                    print_yellow(ELMTM(m,i,j));
+                }else if(ELMTTP(m,idx) == 'd'){
+                    print_blue(ELMTM(m,i,j));
+                }else if(ELMTTP(m,idx) == 'p'){
+                    print_red(ELMTM(m,i,j));
+                }else if(ELMTTP(m,idx) == 'r'){
+                    print_green(ELMTM(m,i,j));
+                }else{
+                    printf("%c",ELMTM(m,i,j));
+                }
+            }else{
+                printf("%c",ELMTM(m,i,j));
+            }
+            
         }
         printf("\n");
     }
