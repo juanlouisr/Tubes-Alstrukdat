@@ -49,6 +49,11 @@ int main()
             displayReachable(M1);
             printf("\n\n");
             movePlayer(M1,&P1,2);
+            updateStatus(&M1,P1);
+            displayMAP(M1);
+            displayReachable(M1);
+            movePlayer(M1,&P1,4);
+            updateStatus(&M1,P1);
             displayMAP(M1);
             displayReachable(M1);
             

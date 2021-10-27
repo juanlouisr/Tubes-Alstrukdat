@@ -27,6 +27,7 @@ void mapBuilding(MAP *m){
     for(i=0;i<nEffBuilding(*m);i++){
         ELMTM(*m,ELMTX(*m,i),ELMTY(*m,i)) = ELMTBLD(*m,i);
     }
+    CreateDaftarLokasi(&REACH(*m),nEffBuilding(*m));
 };
 //Memasukan lokasi building
 
@@ -46,23 +47,6 @@ int getIdxBld(char c){
         return (int)c%64;
     }
 };
-
-void updateStatus(MAP *m,PLAYER p){
-    int i;
-    int idx;
-    char c;
-    free(&REACH(*m));
-    CreateDaftarLokasi(&REACH(*m),nEffBuilding(*m));
-    c = getBuilding(*m,Absis(pLoc(p)),Ordinat(pLoc(p)));
-    idx = getIdxBld(c);
-    for(i=0;i<nEffBuilding(*m);i++){
-        if(ELMTADJ(*m,idx,i) == '1'){
-            ELMTTP(*m,i) = 'r';
-            insertLast(&REACH(*m),LOK(*m,i));
-        } 
-    }
-    ELMTTP(*m,idx) = 'm';
-}
 
 void displayMAP(MAP m){
     int i,j;
@@ -113,6 +97,12 @@ void getAdjacent(MAP *m,FILE *file){
     }
 };
 
+void clearReachable(MAP *m){
+    ElTypeDL tmp;
+    while(!isEmpty(REACH(*m))){
+        deleteLast(&REACH(*m),&tmp);
+    }
+};
 
 
 // int main(void){

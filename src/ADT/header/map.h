@@ -1,6 +1,5 @@
 #ifndef MAP_H
 #define MAP_H
-#include "player.h"
 #include "lokasi.h"
 #include "daftarlokasi.h"
 
@@ -43,9 +42,6 @@ boolean isIdxMapEff(MAP m, int i, int j);
 void getAdjacent(MAP *m, FILE *file);
 //Assign input ADJ matrix
 
-void updateStatus(MAP *m,PLAYER p);
-//Update status dari bangunan
-
 char getBuilding(MAP m,int x,int y);
 //Mengembalikan nama bangunan dengan memasukan koordinat
 
@@ -54,4 +50,7 @@ int getIdxBld(char c);
 
 void displayReachable(MAP m);
 //Menuliskan tempat yang bisa dicapai
+
+void clearReachable(MAP *m);
+//Menghapus matrix reachable
 #endif
