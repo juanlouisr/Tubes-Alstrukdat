@@ -56,6 +56,27 @@ int main()
             updateStatus(&M1,P1);
             displayMAP(M1);
             displayReachable(M1);
+
+            // TEST QUEUE
+            printf("\n");
+            Queue items;
+            CreateQueue(&items);
+            readAllItem(&items, file);
+            printf("Inp prog:\n");
+            for (int i = IDX_HEAD(items); i <= IDX_TAIL(items) ; i++)
+            {
+                printf("%d. ", i+1);
+                printInProgressItem(items.buffer[i]);
+                printf("\n");
+            }
+            printf("To do:\n");
+            for (int i = IDX_HEAD(items); i <= IDX_TAIL(items) ; i++)
+            {
+                printf("%d. ", i+1);
+                printToDoItem(items.buffer[i]);
+                printf("\n");
+            }
+
             
         }
         else if (isWordEQ(word, "2"))
@@ -64,10 +85,10 @@ int main()
         }
         else
         {
-            fclose(file);
             printf("SAMPAI JUMPA LAGI!\n");
         }
     }
+    fclose(file);
     
     
     

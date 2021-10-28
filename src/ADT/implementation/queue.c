@@ -35,7 +35,7 @@ int lengthQ(Queue q)
 }
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val)
+void enqueue(Queue *q, Item val)
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
@@ -64,7 +64,7 @@ void enqueue(Queue *q, ElType val)
     TAIL(*q) = val;
 }
 
-void dequeue(Queue *q, ElType *val)
+void dequeue(Queue *q, Item *val)
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., HEAD dan IDX_HEAD "mundur"; 
@@ -104,7 +104,7 @@ void displayQueue(Queue q)
         printf("[");
         for (i = IDX_HEAD(q); i <= IDX_TAIL(q); i++)
         {
-            printf("%d", (q).buffer[i]);
+            printf("%d", (q).buffer[i].waktudatang);
             if (i == IDX_TAIL(q))
             {
                 printf("]");
@@ -112,6 +112,35 @@ void displayQueue(Queue q)
             else
             {
                 printf(",");
+            }
+        }
+    }
+}
+
+void readAllItem(Queue *q, FILE *file)
+{
+    int count = getIntInputStream(file);
+    Item item;
+    for (int i = 0; i < count; i++)
+    {
+        readItem(&item, file);
+        enqueue(q, item);
+    }
+    sortQueue(q);
+}
+
+// Sort queue berdasarkan waktu masuk (kyk prioqueue)
+void sortQueue(Queue *q)
+{
+    int i = 0;  
+    int j = 0;
+    int n= IDX_HEAD(*q) + lengthQ(*q);
+    for (i = IDX_HEAD(*q); i < n-1; i++) {
+        for (j = IDX_HEAD(*q); j < n-i-1; j++) {
+            if ( (*q).buffer[j].waktudatang > (*q).buffer[j+1].waktudatang) {
+                Item temp = (*q).buffer[j];
+                (*q).buffer[j] = (*q).buffer[j+1];
+                (*q).buffer[j+1] = temp;
             }
         }
     }
