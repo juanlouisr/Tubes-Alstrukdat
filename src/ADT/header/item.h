@@ -16,11 +16,11 @@ typedef enum TIPE_ITEM{
 typedef struct
 {
     TipeItem tipe;
-    char locAwal;  // Lokasi pickup
-    char locAkhir; // Lokasi Drop off
+    float internalTime; // Waktu yang dikurangin waktu berjalan
     int waktudatang; // Waktu bisa di pickup
     int waktuSampai; // Waktu saat pertama kali dia masuk jika perishable
-    float internalTime; // Waktu yang dikurangin waktu berjalan
+    char locAwal;  // Lokasi pickup
+    char locAkhir; // Lokasi Drop off
 } Item;
 
 /* ********** SELEKTOR ********** */

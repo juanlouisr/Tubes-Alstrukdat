@@ -30,9 +30,6 @@ void alokasiMAP(MAP *m,int row, int col,DaftarLokasi lok);
 void mapBuilding(MAP *m);
 //Memasukan lokasi building
 
-void updatePlayerLoc(MAP *m, LOKASI tujuan);
-//Update lokasi palyer di map
-
 void displayMAP(MAP m);
 //Display map
 

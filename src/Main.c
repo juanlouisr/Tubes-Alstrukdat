@@ -32,7 +32,6 @@ int main()
             CreateDaftarLokasi(&DL, jmlBangunan+1);
             insertLast(&DL,P);
             createPlayer(&P1,ELMTLD(DL,0));
-            printf("%d,%d\n",Absis(pLoc(P1)),Ordinat(pLoc(P1)));
             for(i=0;i<jmlBangunan;i++){
                 b = getCharInputStream(file);
                 x = getIntInputStream(file);
@@ -47,20 +46,15 @@ int main()
             displayMAP(M1);
             printf("\n");
             displayReachable(M1);
-            printf("\n\n");
-            movePlayer(M1,&P1,2);
-            updateStatus(&M1,P1);
-            displayMAP(M1);
-            displayReachable(M1);
-            movePlayer(M1,&P1,4);
-            updateStatus(&M1,P1);
-            displayMAP(M1);
-            displayReachable(M1);
 
             // TEST QUEUE
             printf("\n");
             Queue items;
+            Tas Tas1;
+            Item barang1;
+            CreateTas(&Tas1);
             CreateQueue(&items);
+            increaseCurrentMaxCapacity(&Tas1);
             readAllItem(&items, file);
             printf("Inp prog:\n");
             for (int i = IDX_HEAD(items); i <= IDX_TAIL(items) ; i++)
@@ -75,7 +69,12 @@ int main()
                 printf("%d. ", i+1);
                 printToDoItem(items.buffer[i]);
                 printf("\n");
+                push(&Tas1,(items).buffer[i]);
             }
+            displayInProgress(Tas1);
+            for(i = 0;i<5;i++){
+                pop(&Tas1,&barang1);
+            };
 
             
         }

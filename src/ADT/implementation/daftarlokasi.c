@@ -205,4 +205,3 @@ void compactList(DaftarLokasi *l)
 }
 
 
-

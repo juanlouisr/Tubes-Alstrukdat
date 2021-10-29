@@ -161,5 +161,6 @@ void compactList(DaftarLokasi *l);
 /* I.S. List lidak kosong */
 /* F.S. Ukuran nEff = capacity */
 
+
 #endif
 
