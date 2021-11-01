@@ -121,3 +121,18 @@ void wordToStr(Word word, char* str)
     }
     str[word.length] = '\0';
 }
+
+void concatStrWord(const char* in, Word word, char* out)
+{
+    int inLen = getStrLength(in);
+    int i;
+    for (i = 0; i < inLen; i++)
+    {
+        out[i] = in[i];
+    }
+    for (i; i < inLen + word.length; i++)
+    {
+        out[i] = word.contents[i-inLen];
+    }
+    out[inLen + word.length] = '\0';
+}
