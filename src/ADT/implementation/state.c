@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include "../../adtlib.h"
 
-void incrementWaktu(STATE *time){
-    if((*time).speedBoostDur > 0 && (*time).countHeavy == 0){
+void incrementWaktu(STATE *time, Tas tas){
+    if((*time).speedBoostDur > 0 && hCount(tas) == 0){
         (*time).speedBoostDur -= 1;
         (*time).waktu += 0.5;
     }
-    else if((*time).countHeavy > 0){
-        (*time).waktu += (*time).countHeavy + 1;
+    else if(hCount(tas) > 0){
+        (*time).waktu += hCount(tas) + 1;
         (*time).speedBoostDur = 0;
     }
     else{

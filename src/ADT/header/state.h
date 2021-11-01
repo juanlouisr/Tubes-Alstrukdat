@@ -7,10 +7,9 @@
 typedef struct {
     float waktu;
     float speedBoostDur;
-    int countHeavy;
 } STATE;
 
-void incrementWaktu(STATE *time);
+void incrementWaktu(STATE *time, Tas tas);
 
 void mesinWaktu(STATE *time);
 #endif
