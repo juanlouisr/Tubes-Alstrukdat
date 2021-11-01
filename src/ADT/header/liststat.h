@@ -10,7 +10,7 @@
 #include "boolean.h"
 
 /*  Kamus Umum */
-#define LSCAP 100
+#define LSCAP 5
 /* Kapasitas penyimpanan */
 #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
@@ -75,23 +75,14 @@ void readListStat(ListPos *l);
 /* 2. Jika 0 < n <= LSCAP; Lakukan n kali: 
           Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
 /*    Jika n = 0; hanya terbentuk List kosong */
-void displayListStat(ListPos l);
-/* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
-   siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
-   karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
-/* I.S. l boleh kosong */
-/* F.S. Jika l tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika List kosong : menulis [] */
+void displayGadget();
 
-/* ********** OPERATOR ARITMATIKA ********** */
-/* *** Aritmatika List : Penjumlahan, pengurangan, perkalian, ... *** */
-ListPos plusMinusListStat(ListPos l1, ListPos l2, boolean plus);
-/* Prekondisi : l1 dan l2 berukuran sama dan tidak kosong */
-/* Jika plus = true, mengirimkan  l1+l2, yaitu setiap elemen l1 dan l2 pada 
-       indeks yang sama dijumlahkan */
-/* Jika plus = false, mengirimkan l1-l2, yaitu setiap elemen l1 dikurangi 
-       elemen l2 pada indeks yang sama */
+void displayInventory(ListPos l);
+
+void useGadget(ListPos *l, int idx);
+
+void buyGadget(ListPos *l, int idx, PLAYER *player);
+
 
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan List: *** */
@@ -113,9 +104,6 @@ void extremesListStat(ListPos l, ElType *max, ElType *min);
 /* F.S. Max berisi nilai terbesar dalam l;
         Min berisi nilai terkecil dalam l */
 
-/* ********** OPERASI LAIN ********** */
-boolean isAllEvenListStat(ListPos l);
-/* Menghailkan true jika semua elemen l genap */
 
 /* ********** SORTING ********** */
 void sortListStat(ListPos *l, boolean asc);
