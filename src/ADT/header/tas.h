@@ -55,6 +55,8 @@ void increaseCurrentMaxCapacity(Tas *s);
 /* I.S. max cap dari tas terdefinisi*/
 /* F.S. max cap dari tas bertambah 1*/
 
+void senterPembesar(Tas *s);
+
 boolean isContainItem(Tas tas, Item item);
 //Mengembalikan true jika item ada di dalam tas dan false jika tidak
 

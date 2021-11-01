@@ -67,6 +67,15 @@ void increaseCurrentMaxCapacity(Tas *s){
     TasCap(*s)++;
 };
 
+void senterPembesar(Tas *s){
+    if(TasCap(*s) * 2 <= 100){
+        TasCap(*s) *= 2; 
+    }
+    else{
+        TasCap(*s) = 100; 
+    }
+}
+
 boolean isContainItem(Tas tas, Item item){
     Item tmp;
     boolean ada = false;

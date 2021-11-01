@@ -143,6 +143,7 @@ void useGadget(ListPos *l, int idx){
 }
 
 
+
 void buyGadget(ListPos *l, int idx, PLAYER *player){
     if(isFullListStat(*l)){
         printf("Inventory penuh.\n");
