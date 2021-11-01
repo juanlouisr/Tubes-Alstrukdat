@@ -1,6 +1,8 @@
 #include "../header/iolib.h"
 #include <stdio.h>
 
+static char filePath[] = "src/data/";
+
 void printLogo()
 {   
     printf("##     ##  #######  ##    ##    ###    ##    ##  ######   ####  ###### \n");
@@ -97,6 +99,12 @@ int getIntSTDIN()
     return getIntInputStream(stdin);
 }
 
+FILE* openFile(Word word, const char* mode)
+{
+    char str[WORDCAP+20];
+    concatStrWord(filePath, word, str);
+    return fopen(str, mode);
+}
 
 void wordOutputStream(FILE* outputstream, Word word, boolean newline)
 {

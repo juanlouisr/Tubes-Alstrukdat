@@ -23,6 +23,8 @@ int getIntInputStream(FILE* file);
 
 int getIntSTDIN();
 
+FILE* openFile(Word word, const char* mode);
+
 void wordOutputStream(FILE* outputstream, Word word, boolean newline);
 
 void displayWord(Word word, boolean newline);

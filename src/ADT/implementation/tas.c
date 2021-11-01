@@ -55,6 +55,9 @@ void pop(Tas *s, Item *val)
     if(!isEmptyTas(*s)){
         *val = TOP(*s);
         IDX_TOP(*s) -= 1;
+        if(TOP(*s).tipe == 'H'){
+            hCount(*s)--;
+        };
     }else{
         printf("TAS SUDAH KOSONG, TIDAK ADA YANG BISA DITURUNKAN!\n");
     }
@@ -81,17 +84,10 @@ void displayInProgress(Tas tas){
     Item tmp;
     int i = 1;
     while(!isEmptyTas(tas)){
-        printf("%d. ",i);
+        printf("%d. ",i++);
         pop(&tas,&tmp); 
-        if( (tmp).tipe == 'N'){
-            printf("Normal Item ");
-        }else if((tmp).tipe == 'H'){
-            printf("Heavy Item ");
-        }else{
-            printf("VIP Item ");
-        };
-        printf("(Tujuan : %c)\n", (tmp).locAkhir);
-        i++;
+        printInProgressItem(tmp);
+        printf("\n");
     }
     
 };

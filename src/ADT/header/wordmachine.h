@@ -55,4 +55,7 @@ boolean isWordEQ(Word word, const char* str);
 
 void wordToStr(Word word, char* str);
 
+
+void concatStrWord(const char* in, Word word, char* out);
+
 #endif
