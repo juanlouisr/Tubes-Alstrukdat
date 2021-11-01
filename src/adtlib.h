@@ -14,5 +14,6 @@
 #include "ADT/header/map.h"
 #include "ADT/header/player.h"
 #include "ADT/header/wordmachine.h"
+#include "ADT/header/state.h"
 
 #endif

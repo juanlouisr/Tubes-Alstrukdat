@@ -30,3 +30,4 @@ void updateStatus(MAP *m,PLAYER p){
     }
     ELMTTP(*m,idx) = 'm';
 }
+
