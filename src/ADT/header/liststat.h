@@ -79,11 +79,6 @@ void displayGadget();
 
 void displayInventory(ListPos l);
 
-void useGadget(ListPos *l, int idx);
-
-void buyGadget(ListPos *l, int idx, PLAYER *player);
-
-
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan List: *** */
 boolean isListStatEqual(ListPos l1, ListPos l2);

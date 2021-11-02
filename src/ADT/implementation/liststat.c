@@ -99,106 +99,23 @@ void displayGadget(){
 void displayInventory(ListPos l){
     for(int i=0; i<LSCAP; i++){
         if(ELMTLS(l, i) == 1){
-            printf("%d. Kain Pembungkus Waktu\n");
+            printf("%d. Kain Pembungkus Waktu\n", i+1);
         }
         else if(ELMTLS(l, i) == 2){
-            printf("%d. Senter Pembesar\n");
+            printf("%d. Senter Pembesar\n",i+1);
         }
         else if(ELMTLS(l, i) == 3){
-            printf("%d. Pintu Kemana Saja\n");
+            printf("%d. Pintu Kemana Saja\n",i+1);
         }
         else if(ELMTLS(l, i) == 4){
-            printf("%d. Mesin Waktu\n");
+            printf("%d. Mesin Waktu\n",i+1);
         }
         else if(ELMTLS(l, i) == VAL_UNDEF){
-            printf("%d. -\n");
+            printf("%d. -\n",i+1);
         }
     }
     printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n");
 }
-
-void useGadget(ListPos *l, int idx){
-    if(!isIdxValidListStat(*l, idx)){
-        printf("Tidak ada gadget yang dapat digunakan.\n");
-    }
-    else if(ELMTLS(*l, idx) == VAL_UNDEF){
-        printf("Tidak ada gadget yang dapat digunakan.\n");
-    }
-    else if(ELMTLS(*l, idx) == 1){
-        //kainPembungkuswaktu()
-        ELMTLS(*l, idx) = VAL_UNDEF;
-    }
-    else if(ELMTLS(*l, idx) == 2){
-        //SenterPembesar()
-        ELMTLS(*l, idx) = VAL_UNDEF;
-    }
-    else if(ELMTLS(*l, idx) == 3){
-        //pintuKemanaSaja()
-        ELMTLS(*l, idx) = VAL_UNDEF;
-    }
-    else if(ELMTLS(*l, idx) == 4){
-        //mesinWaktu()
-        ELMTLS(*l, idx) = VAL_UNDEF;
-    }
-}
-
-
-
-void buyGadget(ListPos *l, int idx, PLAYER *player){
-    if(isFullListStat(*l)){
-        printf("Inventory penuh.\n");
-    }
-    else if(idx < 0 && idx > 4){
-        printf("Tidak ada gadget yang dapat dibeli.\n");
-    }
-    else{
-        if(idx == 1){
-            if((*player).uang >= 800 ){
-                (*player).uang -= 800;
-                insertAtEmpty(l, idx);
-                printf("Kain Pembungkus Waktu berhasil dibeli.\n");
-                printf("Uang Anda sekarang : %d Yen", (*player).uang);
-            }
-            else{
-                printf("Uang tidak cukup untuk membeli gadget.\n");
-            }
-        }
-        if(idx == 2){
-            if((*player).uang >= 1200 ){
-                (*player).uang -= 1200;
-                insertAtEmpty(l, idx);
-                printf("Senter Pembesar berhasil dibeli.\n");
-                printf("Uang Anda sekarang : %d Yen", (*player).uang);
-            }
-            else{
-                printf("Uang tidak cukup untuk membeli gadget.\n");
-            }
-        }
-        else if(idx == 3){
-            if((*player).uang >= 1500 ){
-                (*player).uang -= 1500;
-                insertAtEmpty(l, idx);
-                printf("Pintu Kemana Saja berhasil dibeli.\n");
-                printf("Uang Anda sekarang : %d Yen", (*player).uang);
-            }
-            else{
-                printf("Uang tidak cukup untuk membeli gadget.\n");
-            }
-        }
-        else if(idx == 4){
-            if((*player).uang >= 3000 ){
-                (*player).uang -= 3000;
-                insertAtEmpty(l, idx);
-                printf("Mesin Waktu berhasil dibeli.\n");
-                printf("Uang Anda sekarang : %d Yen", (*player).uang);
-            }
-            else{
-                printf("Uang tidak cukup untuk membeli gadget.\n");
-            }
-        }
-    }
-}
-
 
 
 /* ********** OPERATOR RELASIONAL ********** */
@@ -331,18 +248,18 @@ void insertLastListStat(ListPos *l, ElType val)
     ELMTLS(*l, lengthListStat(*l)) = val;
 }
 
-void insertAtEmpty(ListPos *l, ElType val){
-    int i=0;
-    while(i < LSCAP){
-        if(ELMTLS(*l, i) == VAL_UNDEF){
-            ELMTLS(*l, i) = val;
-            break;
-        }
-        else{
-            i++;
-        }
-    }
-}
+// void insertAtEmpty(ListPos *l, ElType val){
+//     int i=0;
+//     while(i < LSCAP){
+//         if(ELMTLS(*l, i) == VAL_UNDEF){
+//             ELMTLS(*l, i) = val;
+//             break;
+//         }
+//         else{
+//             i++;
+//         }
+//     }
+// }
 
 /* ********** MENGHAPUS ELEMEN ********** */
 void deleteLastListStat(ListPos *l, ElType *val)

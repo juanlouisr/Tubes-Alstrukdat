@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include "../../adtlib.h"
 
-void createPlayer(PLAYER *p,LOKASI lokAwal, int uang, Tas tas){
+void createPlayer(PLAYER *p,LOKASI lokAwal, Tas tas, 
+        ListPos invGadget,  int uang, int speedBoostDur){
     pLoc(*p) = lokAwal;
     pTas(*p) = tas;
     pUang(*p) = uang;
+    pInvG(*p) = invGadget;
+    pSpdDur(*p) = speedBoostDur;
 }
 
 void movePlayer(MAP m, PLAYER *p,int opt){
@@ -83,6 +86,87 @@ void dropOff(PLAYER *p){
             // if (idx != -1){
             //     deleteAt(&pTodo(*p), idx, &item);
             // }
+        }
+    }
+}
+
+void useGadget(PLAYER *p, int idx){
+    if(!isIdxValidListStat(pInvG(*p), idx)){
+        printf("Tidak ada gadget yang dapat digunakan.\n");
+    }
+    else if(ELMTLS(pInvG(*p), idx) == VAL_UNDEF){
+        printf("Tidak ada gadget yang dapat digunakan.\n");
+    }
+    else if(ELMTLS(pInvG(*p), idx) == 1){
+        //kainPembungkuswaktu()
+        ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
+    }
+    else if(ELMTLS(pInvG(*p), idx) == 2){
+        //SenterPembesar()
+        ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
+    }
+    else if(ELMTLS(pInvG(*p), idx) == 3){
+        //pintuKemanaSaja()
+        ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
+    }
+    else if(ELMTLS(pInvG(*p), idx) == 4){
+        //mesinWaktu()
+        ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
+    }
+}
+
+
+void buyGadget(PLAYER *player, int idx){
+    if(isFullListStat(pInvG(*player))){
+        printf("Inventory penuh.\n");
+    }
+    else if(idx < 0 && idx > 4){
+        printf("Tidak ada gadget yang dapat dibeli.\n");
+    }
+    else{
+        if(idx == 1){
+            if((*player).uang >= 800 ){
+                (*player).uang -= 800;
+                insertLastListStat(&pInvG(*player), idx);
+                printf("Kain Pembungkus Waktu berhasil dibeli.\n");
+                printf("Uang Anda sekarang : %d Yen", (*player).uang);
+            }
+            else{
+                printf("Uang tidak cukup untuk membeli gadget.\n");
+            }
+        }
+        if(idx == 2){
+            if((*player).uang >= 1200 ){
+                (*player).uang -= 1200;
+                insertLastListStat(&pInvG(*player), idx);
+                printf("Senter Pembesar berhasil dibeli.\n");
+                printf("Uang Anda sekarang : %d Yen", (*player).uang);
+            }
+            else{
+                printf("Uang tidak cukup untuk membeli gadget.\n");
+            }
+        }
+        else if(idx == 3){
+            if((*player).uang >= 1500 ){
+                (*player).uang -= 1500;
+                insertLastListStat(&pInvG(*player), idx);
+                printf("Pintu Kemana Saja berhasil dibeli.\n");
+                printf("Uang Anda sekarang : %d Yen", (*player).uang);
+            }
+            else{
+                printf("Uang tidak cukup untuk membeli gadget.\n");
+            }
+        }
+        else if(idx == 4){
+            if((*player).uang >= 3000 ){
+                (*player).uang -= 3000;
+                insertLastListStat(&pInvG(*player), idx);
+                printf("Mesin Waktu berhasil dibeli.\n");
+                printf("Uang Anda sekarang : %d Yen", (*player).uang);
+            }
+            else{
+                printf("Uang tidak cukup untuk membeli gadget.\n");
+            }
         }
     }
 }

@@ -31,7 +31,9 @@ int main()
             int jmlBangunan = getIntInputStream(file);
             CreateDaftarLokasi(&DL, jmlBangunan+1);
             insertLast(&DL,P);
-            createPlayer(&P1,ELMTLD(DL,0));
+            Tas tasss;
+            ListPos invg;
+            createPlayer(&P1,ELMTLD(DL,0),tasss, invg, 0, 5);
             for(i=0;i<jmlBangunan;i++){
                 b = getCharInputStream(file);
                 x = getIntInputStream(file);
