@@ -54,10 +54,10 @@ void pop(Tas *s, Item *val)
 {
     if(!isEmptyTas(*s)){
         *val = TOP(*s);
-        IDX_TOP(*s) -= 1;
         if(TOP(*s).tipe == 'H'){
             hCount(*s)--;
         };
+        IDX_TOP(*s) -= 1;
     }else{
         printf("TAS SUDAH KOSONG, TIDAK ADA YANG BISA DITURUNKAN!\n");
     }
@@ -81,7 +81,7 @@ boolean isContainItem(Tas tas, Item item){
     boolean ada = false;
     while(!isEmptyTas(tas) && !ada){
         pop(&tas,&tmp);
-        if((tmp).locAwal == (item).locAwal && (tmp).locAkhir == (item).locAkhir && (tmp).tipe == (item).tipe && (tmp).internalTime == (item).internalTime){
+        if (IsItemSama(tmp, item)){
             ada = true;
         }
     }
