@@ -3,13 +3,31 @@
 
 #include "lokasi.h"
 #include "map.h"
+#include "player.h"
+#include "queue.h"
 
 typedef struct {
     float waktu;
-    float speedBoostDur;
+    PLAYER player;
+    MAP map;
+    Queue itemsQueue;
 } STATE;
 
-void incrementWaktu(STATE *time, Tas tas);
+/* --------- SELEKTOR STATE --------- */
+#define CURR_PLAYER(p) (p).player
+#define CURR_MAP(p) (p).map
+#define CURR_QUEUE(p) (p).itemsQueue
+#define CURR_TIME(p) (p).waktu
+#define CURR_TAS(p) pTas(CURR_PLAYER(p))
+#define CURR_TODO(p) pTodo(CURR_PLAYER(p))
 
-void mesinWaktu(STATE *time);
+
+/* --------- KONSTRUKTOR STATE --------- */
+void CreateSTATE(STATE* state, PLAYER p, MAP map, Queue queue, float startTime);
+
+
+/* --------- PROSEDUR/FUNGSI STATE --------- */
+void incrementWaktu(STATE *state);
+void mesinWaktu(STATE *state);
+
 #endif

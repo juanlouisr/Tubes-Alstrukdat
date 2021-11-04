@@ -1,26 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../adtlib.h"
+#include "../header/state.h"
 
-void incrementWaktu(STATE *time, Tas tas){
-    if((*time).speedBoostDur > 0 && hCount(tas) == 0){
-        (*time).speedBoostDur -= 1;
-        (*time).waktu += 0.5;
-    }
-    else if(hCount(tas) > 0){
-        (*time).waktu += hCount(tas) + 1;
-        (*time).speedBoostDur = 0;
-    }
-    else{
-        (*time).waktu += 1;
-    }
+
+void CreateSTATE(STATE* state, PLAYER p, MAP map, Queue queue, float startTime)
+{
+    CURR_TIME(*state) = startTime;
+    CURR_MAP(*state) = map;
+    CURR_QUEUE(*state) = queue;
+    CURR_PLAYER(*state) = p;
 }
 
-void mesinWaktu(STATE *time){
-    if((*time).waktu >= 50){
-        (*time).waktu -= 50;
+
+void incrementWaktu(STATE *state){
+    float deltaTime = 0;
+    if(pSpdDur(CURR_PLAYER(*state)) > 0 && hCount(CURR_TAS(*state)) == 0){
+        pSpdDur(CURR_PLAYER(*state))  -= 1;
+        deltaTime += 0.5;
+    }
+    else if(hCount(CURR_TAS(*state)) > 0){
+        deltaTime += hCount(CURR_TAS(*state)) + 1;
+        pSpdDur(CURR_PLAYER(*state))  = 0;
     }
     else{
-        (*time).waktu = 0;
+        deltaTime += 1;
+    }
+    CURR_TIME(*state) += deltaTime;
+}
+
+void mesinWaktu(STATE *state){
+    if(CURR_TIME(*state) >= 50){
+        CURR_TIME(*state) -= 50;
+    }
+    else{
+        CURR_TIME(*state) = 0;
     }
 }

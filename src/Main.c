@@ -2,105 +2,115 @@
 #include "adtlib.h"
 #include "utillib.h"
 
+void LoadConfig(MAP *map, PLAYER *player, Queue *queue, FILE *file);
+void LoadNewState(STATE *state);
+void GameHandler(Word command, STATE *state);
+
+STATE state;
+
 int main()
 {
     printLogo();
     printMenu();
-    FILE* file = fopen("src/data/config.cfg", "r");
-    if (file != NULL)
+    
+    printf(">> ");
+    Word word = getWordInputStream(stdin);
+
+    if (isWordEQ(word, "1"))
     {
-        printf(">> ");
-        Word word = getWordInputStream(stdin);
-
-        if (isWordEQ(word, "1"))
+        printf("NEW GAME!\n");
+        LoadNewState(&state);
+        displayMAP(CURR_MAP(state));
+        displayReachable(CURR_MAP(state));
+        Word command;
+        do
         {
-            printf("NEW GAME!\n");
-            int row = getIntInputStream(file);
-            int col = getIntInputStream(file);
-            printf("row : %d, col : %d\n", row, col);
-            char b;
-            int x,y;
-            LOKASI P;
-            MAP M1;
-            DaftarLokasi DL;
-            int i,j;
-            PLAYER P1;
-            x = getIntInputStream(file);
-            y = getIntInputStream(file);
-            P = MakeLOKASI('8',x,y,'h');
-            int jmlBangunan = getIntInputStream(file);
-            CreateDaftarLokasi(&DL, jmlBangunan+1);
-            insertLast(&DL,P);
-            Tas tasss;
-            ListPos invg;
-            createPlayer(&P1,ELMTLD(DL,0),tasss, invg, 0, 5);
-            for(i=0;i<jmlBangunan;i++){
-                b = getCharInputStream(file);
-                x = getIntInputStream(file);
-                y = getIntInputStream(file);
-                P = MakeLOKASI(b,x,y,'b');
-                insertLast(&DL,P);
-            }
-            alokasiMAP(&M1,row,col,DL);
-            mapBuilding(&M1);
-            getAdjacent(&M1,file);
-            updateStatus(&M1,P1);
-            displayMAP(M1);
-            printf("\n");
-            displayReachable(M1);
+            printf(">> ");
+            command = getWordSTDIN();
+            GameHandler(command, &state);
+        } while (!isWordEQ(command, "EXIT"));
+        
 
-            // TEST QUEUE
-            printf("\n");
-            Queue items;
-            Tas Tas1;
-            Item barang1;
-            CreateTas(&Tas1);
-            CreateQueue(&items);
-            increaseCurrentMaxCapacity(&Tas1);
-            readAllItem(&items, file);
-            printf("Inp prog:\n");
-            for (int i = IDX_HEAD(items); i <= IDX_TAIL(items) ; i++)
-            {
-                printf("%d. ", i+1);
-                printInProgressItem(items.buffer[i]);
-                printf("\n");
-            }
-            printf("To do:\n");
-            for (int i = IDX_HEAD(items); i <= IDX_TAIL(items) ; i++)
-            {
-                printf("%d. ", i+1);
-                printToDoItem(items.buffer[i]);
-                printf("\n");
-                push(&Tas1,(items).buffer[i]);
-            }
-            displayInProgress(Tas1);
-            for(i = 0;i<5;i++){
-                pop(&Tas1,&barang1);
-            };
-
-            
-        }
-        else if (isWordEQ(word, "2"))
-        {
-            printf("LOAD GAME!\n");
-        }
-        else
-        {
-            printf("SAMPAI JUMPA LAGI!\n");
-        }
     }
-    fclose(file);
-    
-    
+    else if (isWordEQ(word, "2"))
+    {
+        printf("LOAD GAME!\n");
+    }
+    else
+    {
+        printf("SAMPAI JUMPA LAGI!\n");
+    }
     
 
-    // printf("hasil get word stdin: ");
-    // wordOutputStream(stdout, word, true);
-
-    // char c = getCharSTDIN();
-    // printf("hasil get char: %c\n", c);
-
-    
 
     return 0;
+}
+
+void LoadNewState(STATE *state)
+{
+    FILE* file;
+    printf("Nama file config:\n");
+    do
+    {
+        printf(">> ");
+        Word inptCfg = getWordSTDIN();
+        file = openFile(inptCfg, "r");
+        if (file == NULL) 
+            printf("File tidak ada, silahkan ulangi\n");
+    } while (file == NULL);
+    MAP map;
+    PLAYER p;
+    Queue q;
+    LoadConfig(&map, &p, &q, file);
+    CreateSTATE(state, p, map, q, 0);
+    fclose(file);
+}
+
+void LoadConfig(MAP *map, PLAYER *player, Queue *queue, FILE *file)
+{
+    int row = getIntInputStream(file);
+    int col = getIntInputStream(file);
+    char b;
+    int x,y;
+    LOKASI P;
+    DaftarLokasi DL;
+    int i,j;
+    x = getIntInputStream(file);
+    y = getIntInputStream(file);
+    P = MakeLOKASI('8',x,y,'h');
+    int jmlBangunan = getIntInputStream(file);
+    CreateDaftarLokasi(&DL, jmlBangunan+1);
+    insertLast(&DL,P);
+
+    Tas tas;
+    ListPos invg;
+    List todo;
+    CreateTas(&tas);
+    CreateListStat(&invg);
+    CreateListTodoList(&todo);
+    createPlayer(player,ELMTLD(DL,0),tas, todo, invg, 0, 5);
+
+    for(i=0;i<jmlBangunan;i++){
+        b = getCharInputStream(file);
+        x = getIntInputStream(file);
+        y = getIntInputStream(file);
+        P = MakeLOKASI(b,x,y,'b');
+        insertLast(&DL,P);
+    }
+    alokasiMAP(map,row,col,DL);
+    mapBuilding(map);
+    getAdjacent(map,file);
+    updateStatus(map,*player);
+
+    CreateQueue(queue);
+    readAllItem(queue, file);
+}
+
+void GameHandler(Word command, STATE *state)
+{
+    wordOutputStream(stdout, command, true);
+    if (isWordEQ(command, "HMM"))
+    {
+        printf("WOKE\n");
+    }
 }
