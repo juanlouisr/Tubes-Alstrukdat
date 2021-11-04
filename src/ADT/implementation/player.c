@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include "../../adtlib.h"
 
-void createPlayer(PLAYER *p,LOKASI lokAwal, Tas tas, 
-        ListPos invGadget,  int uang, int speedBoostDur){
+void createPlayer(PLAYER *p,LOKASI lokAwal, Tas tas, List todo,
+                ListPos invGadget,  int uang, int speedBoostDur){
     pLoc(*p) = lokAwal;
     pTas(*p) = tas;
     pUang(*p) = uang;
+    pTodo(*p) = todo;
     pInvG(*p) = invGadget;
     pSpdDur(*p) = speedBoostDur;
 }
@@ -43,16 +44,16 @@ void pickUp(PLAYER *p){
     else{
         boolean found = false;
         // Ngambil dari todolist
-        // Address temp = pTodo(*p);
-        // while (temp != NULL && !found){
-        //     if (INFO(temp).locAwal == pLoc(*p).Nama){
-        //         if (!isContainItem(pTas(*p), INFO(temp))){
-        //             found == true;
-        //             push(pTas(*p), INFO(temp))
-        //         }
-        //     }
-        //     temp = NEXT(temp);
-        // }
+        Address temp = pTodo(*p);
+        while (temp != NULL && !found){
+            if (INFO(temp).locAwal == pLoc(*p).Nama){
+                if (!isContainItem(pTas(*p), INFO(temp))){
+                    found == true;
+                    push(&pTas(*p), INFO(temp));
+                }
+            }
+            temp = NEXT(temp);
+        }
     }
 }
 
@@ -82,10 +83,10 @@ void dropOff(PLAYER *p){
                 break;
             }
             // Hapus dari todo
-            // int idx = indexOfLinkedList(pTodo(*p), item);
-            // if (idx != -1){
-            //     deleteAt(&pTodo(*p), idx, &item);
-            // }
+            int idx = indexOfTodoList(pTodo(*p), item);
+            if (idx != IDX_UNDEF){
+                deleteAtTodoList(&pTodo(*p), idx, &item);
+            }
         }
     }
 }

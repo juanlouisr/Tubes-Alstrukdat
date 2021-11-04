@@ -3,11 +3,13 @@
 
 #include "lokasi.h"
 #include "liststat.h"
+#include "todoList.h"
 #include "map.h"
 
 typedef struct {
     LOKASI loc;
     Tas tas;
+    List todo;
     ListPos invGadget;
     int uang;
     int speedBoostDur;
@@ -22,7 +24,7 @@ typedef struct {
 
 
 
-void createPlayer(PLAYER *p,LOKASI lokAwal, Tas tas, ListPos invGadget,  int uang, int speedBoostDur);
+void createPlayer(PLAYER *p,LOKASI lokAwal, Tas tas, List todo, ListPos invGadget,  int uang, int speedBoostDur);
 /*Membuat player baru dengan
     lokasi = lokAwal
 
