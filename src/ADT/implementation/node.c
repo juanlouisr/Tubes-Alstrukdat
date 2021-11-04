@@ -1,10 +1,10 @@
 /* File: node.c */
 /* Implementasi Node */
 
-#include "node.h"
+#include "../header/node.h"
 #include <stdlib.h>
 
-Address newNode(ElType val)
+Address newNode(ElTypeNode val)
 {
     Address p = (Address)malloc(sizeof(Node));
     if (p != NULL)

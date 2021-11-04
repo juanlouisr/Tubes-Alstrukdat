@@ -2,7 +2,8 @@
 #define LIST_H
 
 #include "boolean.h"
-#include "../originaladt/node.h"
+#include "node.h"
+#include "tas.h"
 
 typedef Address List;
 
@@ -25,15 +26,15 @@ boolean isEmptyTodoList(List l);
 /* Mengirim true jika list kosong */
 
 /****************** GETTER SETTER ******************/
-ElType getElmtTodoList(List l, int idx);
+ElTypeNode getElmtTodoList(List l, int idx);
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengembalikan nilai elemen l pada indeks idx */
 
-void setElmtTodoList(List *l, int idx, ElType val);
+void setElmtTodoList(List *l, int idx, ElTypeNode val);
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
 
-int indexOfTodoList(List l, ElType val);
+int indexOfTodoList(List l, ElTypeNode val);
 /* I.S. l, val terdefinisi */
 /* F.S. Mencari apakah ada elemen list l yang bernilai val */
 /* Jika ada, mengembalikan indeks elemen pertama l yang bernilai val */
@@ -41,35 +42,35 @@ int indexOfTodoList(List l, ElType val);
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void insertFirstTodoList(List *l, ElType val);
+void insertFirstTodoList(List *l, ElTypeNode val);
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
 /* Jika alokasi gagal: I.S.= F.S. */
 
-void insertLastTodoList(List *l, ElType val);
+void insertLastTodoList(List *l, ElTypeNode val);
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
-void insertAtTodoList(List *l, ElType val, int idx);
+void insertAtTodoList(List *l, ElTypeNode val, int idx);
 /* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
 /* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
 /*** PENGHAPUSAN ELEMEN ***/
-void deleteFirstTodoList(List *l, ElType *val);
+void deleteFirstTodoList(List *l, ElTypeNode *val);
 /* I.S. List l tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen pertama di-dealokasi */
-void deleteLastTodoList(List *l, ElType *val);
+void deleteLastTodoList(List *l, ElTypeNode *val);
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen terakhir di-dealokasi */
 
-void deleteAtTodoList(List *l, int idx, ElType *val);
+void deleteAtTodoList(List *l, int idx, ElTypeNode *val);
 /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. val diset dengan elemen l pada indeks ke-idx. */
 /*      Elemen l pada indeks ke-idx dihapus dari l */

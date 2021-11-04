@@ -21,7 +21,7 @@ boolean isEmptyTodoList(List l)
 }
 
 /****************** GETTER SETTER ******************/
-ElType getElmtTodoList(List l, int idx)
+ElTypeNode getElmtTodoList(List l, int idx)
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengembalikan nilai elemen l pada indeks idx */
 {
@@ -38,7 +38,7 @@ ElType getElmtTodoList(List l, int idx)
     return (INFO(p));
 }
 
-void setElmtTodoList(List *l, int idx, ElType val)
+void setElmtTodoList(List *l, int idx, ElTypeNode val)
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
 {
@@ -55,7 +55,7 @@ void setElmtTodoList(List *l, int idx, ElType val)
     INFO(p) = val;
 }
 
-int indexOfTodoList(List l, ElType val)
+int indexOfTodoList(List l, ElTypeNode val)
 /* I.S. l, val terdefinisi */
 /* F.S. Mencari apakah ada elemen list l yang bernilai val */
 /* Jika ada, mengembalikan indeks elemen pertama l yang bernilai val */
@@ -69,7 +69,7 @@ int indexOfTodoList(List l, ElType val)
     found = false;
     while ((NEXT(p) != NULL) && !found)
     {
-        if (INFO(p) == val)
+        if (IsItemSama(INFO(p), val))
         {
             found = true;
         }
@@ -91,7 +91,7 @@ int indexOfTodoList(List l, ElType val)
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void insertFirstTodoList(List *l, ElType val)
+void insertFirstTodoList(List *l, ElTypeNode val)
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
@@ -107,7 +107,7 @@ void insertFirstTodoList(List *l, ElType val)
     }
 }
 
-void insertLastTodoList(List *l, ElType val)
+void insertLastTodoList(List *l, ElTypeNode val)
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
@@ -115,9 +115,9 @@ void insertLastTodoList(List *l, ElType val)
 {
     Address p, new;
 
-    if (isEmpty(*l))
+    if (isEmptyTodoList(*l))
     {
-        insertFirst(l, val);
+        insertFirstTodoList(l, val);
     }
     else
     {
@@ -136,7 +136,7 @@ void insertLastTodoList(List *l, ElType val)
     }
 }
 
-void insertAtTodoList(List *l, ElType val, int idx)
+void insertAtTodoList(List *l, ElTypeNode val, int idx)
 /* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
@@ -147,7 +147,7 @@ void insertAtTodoList(List *l, ElType val, int idx)
 
     if (idx == 0)
     {
-        insertFirst(l, val);
+        insertFirstTodoList(l, val);
     }
     else
     {
@@ -170,7 +170,7 @@ void insertAtTodoList(List *l, ElType val, int idx)
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-void deleteFirstTodoList(List *l, ElType *val)
+void deleteFirstTodoList(List *l, ElTypeNode *val)
 /* I.S. List l tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen pertama di-dealokasi */
@@ -183,7 +183,7 @@ void deleteFirstTodoList(List *l, ElType *val)
     free(p);
 }
 
-void deleteLastTodoList(List *l, ElType *val)
+void deleteLastTodoList(List *l, ElTypeNode *val)
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -211,7 +211,7 @@ void deleteLastTodoList(List *l, ElType *val)
     free(p);
 }
 
-void deleteAtTodoList(List *l, int idx, ElType *val)
+void deleteAtTodoList(List *l, int idx, ElTypeNode *val)
 /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. val diset dengan elemen l pada indeks ke-idx. */
 /*      Elemen l pada indeks ke-idx dihapus dari l */
@@ -221,7 +221,7 @@ void deleteAtTodoList(List *l, int idx, ElType *val)
 
     if (idx == 0)
     {
-        deleteFirst(l, val);
+        deleteFirstTodoList(l, val);
     }
     else
     {
@@ -279,4 +279,20 @@ int lengthTodoList(List l)
 
 Item getItemAtLoc(List l, char loc, Tas tas)
 {
+    Item item;
+    Address p = FIRST(l);
+    boolean found = false;
+    while (p != NULL && !found)
+    {
+        if (INFO(p).locAwal == loc && !isContainItem(tas, INFO(p)))
+        {
+            found = true;
+            item = INFO(p);
+        }
+        else
+        {
+            p = NEXT(p);
+        }
+    }
+    return item;
 }
