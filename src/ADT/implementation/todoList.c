@@ -67,7 +67,7 @@ int indexOfTodoList(List l, ElTypeNode val)
     boolean found;
 
     found = false;
-    while ((NEXT(p) != NULL) && !found)
+    while ((p != NULL) && !found)
     {
         if (IsItemSama(INFO(p), val))
         {
@@ -253,13 +253,16 @@ void displayTodoList(List l)
     Address p;
 
     p = FIRST(l);
-    printf("[");
-    while (NEXT(p) != NULL)
+    printf("Pesanan pada To Do List:\n");
+    int count = 0;
+    while (p != NULL)
     {
-        printf("%d,", INFO(p));
+        printf("%d. ", ++count);
+        printToDoItem(INFO(p));
+        printf("\n");
         p = NEXT(p);
     }
-    printf("%d]", INFO(p));
+    
 }
 
 int lengthTodoList(List l)

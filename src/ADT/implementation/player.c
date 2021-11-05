@@ -42,17 +42,23 @@ void pickUp(PLAYER *p){
         printf("ZHISUKA MARAH LHOO\n");
     }
     else{
-        boolean found = false;
-        // Ngambil dari todolist
-        Address temp = pTodo(*p);
-        while (temp != NULL && !found){
-            if (INFO(temp).locAwal == pLoc(*p).Nama){
-                if (!isContainItem(pTas(*p), INFO(temp))){
-                    found == true;
+        if (isFullTas(pTas(*p))){
+            printf("TAS SUDAH PENUH! HARAP KIRIMKAN BARANG TERLEBIH DAHULU!\n");
+        }
+        else{
+            boolean found = false;
+            // Ngambil dari todolist
+            Address temp = pTodo(*p);
+            while (temp != NULL && !found){
+                if (INFO(temp).locAwal == pLoc(*p).Nama && !isContainItem(pTas(*p), INFO(temp))){
+                    found = true;
                     push(&pTas(*p), INFO(temp));
+                    printf("Pesanan masuk tas!\n");
+                }
+                else{
+                    temp = NEXT(temp);
                 }
             }
-            temp = NEXT(temp);
         }
     }
 }
