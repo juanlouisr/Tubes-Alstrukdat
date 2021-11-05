@@ -26,6 +26,16 @@ void incrementWaktu(STATE *state){
         deltaTime += 1;
     }
     CURR_TIME(*state) += deltaTime;
+    boolean found = false;
+    while (!isEmptyQ(CURR_QUEUE(*state)) && HEAD(CURR_QUEUE(*state)).waktudatang <= CURR_TIME(*state))
+    {
+        Item item;
+        dequeue(&CURR_QUEUE(*state), &item);
+        insertFirstTodoList(&CURR_TODO(*state), item);
+    }
+    // CEK DELTA TIME
+    // KURANGIN MASING MASING INTERNAL TIME PERISHABLE ITEM DALAM TAS DENGAN DELTA TIME
+    
 }
 
 void mesinWaktu(STATE *state){
