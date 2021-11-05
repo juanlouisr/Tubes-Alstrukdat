@@ -6,25 +6,29 @@ void LoadConfig(MAP *map, PLAYER *player, Queue *queue, FILE *file);
 void LoadNewState(STATE *state);
 void GameHandler(Word command, STATE *state);
 
-STATE state;
 
 int main()
 {
+    printf(GREEN);
     printLogo();
+    printf(NORMAL);
     printMenu();
     
     printf(">> ");
     Word word = getWordInputStream(stdin);
-
+    STATE state;
     if (isWordEQ(word, "1"))
     {
         printf("NEW GAME!\n");
         LoadNewState(&state);
         displayMAP(CURR_MAP(state));
-        displayReachable(CURR_MAP(state));
         Word command;
         do
         {
+            printf("Mobita sekarang berada di titik ");
+            TulisLOKASI(CURR_PLAYER(state).loc);
+            printf("Waktu: %.0f\n", CURR_TIME(state));
+            printf("Uang yang dimiliki: %d Yen\n", pUang(CURR_PLAYER(state)));
             printf(">> ");
             command = getWordSTDIN();
             GameHandler(command, &state);
@@ -56,7 +60,7 @@ void LoadNewState(STATE *state)
         Word inptCfg = getWordSTDIN();
         file = openFile(inptCfg, "r");
         if (file == NULL) 
-            printf("File tidak ada, silahkan ulangi\n");
+            fprintf(stderr,"%s%s%s%s", RED, inptCfg.contents," tidak ditemukan, silahkan ulangi\n", NORMAL);
     } while (file == NULL);
     MAP map;
     PLAYER p;
@@ -88,7 +92,7 @@ void LoadConfig(MAP *map, PLAYER *player, Queue *queue, FILE *file)
     CreateTas(&tas);
     CreateListStat(&invg);
     CreateListTodoList(&todo);
-    createPlayer(player,ELMTLD(DL,0),tas, todo, invg, 0, 5);
+    createPlayer(player,ELMTLD(DL,0),tas, todo, invg, 0, 0);
 
     for(i=0;i<jmlBangunan;i++){
         b = getCharInputStream(file);
@@ -108,9 +112,50 @@ void LoadConfig(MAP *map, PLAYER *player, Queue *queue, FILE *file)
 
 void GameHandler(Word command, STATE *state)
 {
-    wordOutputStream(stdout, command, true);
-    if (isWordEQ(command, "HMM"))
+    if (isWordEQ(command, "MOVE"))
     {
-        printf("WOKE\n");
+        displayReachable(CURR_MAP(*state));
+        printf(">> ");
+        int opt = getIntSTDIN();
+        if (opt != 0)
+        {
+            movePlayer(CURR_MAP(*state), &CURR_PLAYER(*state), opt);
+            incrementWaktu(state);
+            
+        }
     }
+    else if (isWordEQ(command, "MAP"))
+    {
+        displayMAP(CURR_MAP(*state));
+    }
+    else if (isWordEQ(command, "PICK_UP"))
+    {
+        pickUp(&CURR_PLAYER(*state));
+    }
+    else if (isWordEQ(command, "DROP_OFF"))
+    {
+        dropOff(&CURR_PLAYER(*state));
+    }
+    else if (isWordEQ(command, "TO_DO"))
+    {
+        displayTodoList(CURR_TODO(*state));
+    }
+    else if (isWordEQ(command, "IN_PROGRESS"))
+    {
+        displayInProgress(CURR_TAS(*state));
+    }
+    else if (isWordEQ(command, "BUY"))
+    {
+        
+    }
+    else if (isWordEQ(command, "INVENTORY"))
+    {
+
+    }
+    else if (isWordEQ(command, "HELP"))
+    {
+
+    }
+    printf("\n");
+    updateStatus(&CURR_MAP(*state), CURR_PLAYER(*state));
 }
