@@ -12,6 +12,9 @@ print_xxx(c) will print c with xxx color. Import this header to use the declared
 We only provide 8 colors. Feel free to modify/add colors if you want to.
 **/
 
+#ifndef _COLOR_LIB_
+#define _COLOR_LIB_
+
 #define NORMAL "\x1B[0m"
 #define RED "\x1B[31m"
 #define GREEN "\x1B[32m"
@@ -26,3 +29,5 @@ void print_yellow(char c);
 void print_blue(char c);
 void print_magenta(char c);
 void print_cyan(char c);
+
+#endif
