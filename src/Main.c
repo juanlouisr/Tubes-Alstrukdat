@@ -5,6 +5,7 @@
 void LoadConfig(MAP *map, PLAYER *player, Queue *queue, FILE *file);
 void LoadNewState(STATE *state);
 void GameHandler(Word command, STATE *state);
+void displayHelp();
 
 
 int main()
@@ -67,6 +68,7 @@ void LoadNewState(STATE *state)
     Queue q;
     LoadConfig(&map, &p, &q, file);
     CreateSTATE(state, p, map, q, 0);
+    updateStatus(state);
     fclose(file);
 }
 
@@ -104,7 +106,6 @@ void LoadConfig(MAP *map, PLAYER *player, Queue *queue, FILE *file)
     alokasiMAP(map,row,col,DL);
     mapBuilding(map);
     getAdjacent(map,file);
-    updateStatus(map,*player);
 
     CreateQueue(queue);
     readAllItem(queue, file);
@@ -120,6 +121,7 @@ void GameHandler(Word command, STATE *state)
         if (opt != 0)
         {
             movePlayer(CURR_MAP(*state), &CURR_PLAYER(*state), opt);
+            updateStatus(state);
             incrementWaktu(state);
             
         }
@@ -146,16 +148,33 @@ void GameHandler(Word command, STATE *state)
     }
     else if (isWordEQ(command, "BUY"))
     {
-        
+        displayMoney(CURR_PLAYER(*state));
+        displayGadget();
+        printf(">> ");
+        int idx = getIntSTDIN();
+        buyGadget(&CURR_PLAYER(*state),idx);
+
     }
     else if (isWordEQ(command, "INVENTORY"))
     {
-
+        displayInventory(CURR_PLAYER(*state).invGadget);
     }
     else if (isWordEQ(command, "HELP"))
     {
-
+        displayHelp();
     }
     printf("\n");
-    updateStatus(&CURR_MAP(*state), CURR_PLAYER(*state));
+    updateStatus(state);
 }
+
+void displayHelp(){
+    printf("1. MOVE         : Menampilkan pilihan lokasi yang dapat dicapai lalu menerima input angka sesuai pilihan\n");
+    printf("2. PICK_UP      : Mengambil item pada tempat pick up\n");
+    printf("3. DROP_OFF     : Mengantarkan item ketika sudah tiba di lokasi, jika tidak ada yang perlu didrop maka akan muncul pesan\n");
+    printf("4. MAP          : Menampilkan peta\n");
+    printf("5. TO_DO        : Menampilkan urutan pesanan yang masuk\n");
+    printf("6. IN_PROGRESS  : Menampilkan pesanan yang sedang diantarkan\n");
+    printf("7. BUY          : Menampilkan gadget yang dapat dibeli lalu menerima input untuk membeli\n");
+    printf("8. INVENTORY    : Menampilkan isi inventory yang dapat digunakan\n");
+    printf("9. HELP         : Menampilkan list command yang dapat digunakan beserta penjelansannya\n");
+};

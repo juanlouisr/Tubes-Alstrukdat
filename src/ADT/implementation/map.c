@@ -40,11 +40,11 @@ char getBuilding(MAP m,int x,int y){
     }
 };
 
-int getIdxBld(char c){
-    if(c == '8'){
-        return 0;
-    }else{
-        return (int)c%64;
+int getIdxBld(char c,MAP M){
+    for(int i=0;i<nEffBuilding(M);i++){
+        if(ELMTBLD(M,i) == c){
+            return i;
+        }
     }
 };
 
@@ -54,7 +54,7 @@ void displayMAP(MAP m){
         for(j=0;j<COL(m)+2;j++){
             if(ELMTM(m,i,j) != '*' && ELMTM(m,i,j) != ' '){
                 int idx;
-                idx = getIdxBld(ELMTM(m,i,j));
+                idx = getIdxBld(ELMTM(m,i,j),m);
                 if(ELMTTP(m,idx) == 'm'){
                     print_yellow(ELMTM(m,i,j));
                 }else if(ELMTTP(m,idx) == 'd'){
@@ -104,6 +104,15 @@ void clearReachable(MAP *m){
     }
 };
 
+void displayAdjacent(MAP m){
+    int i,j;
+    for(i=0;i<18;i++){
+        for(j=0;j<18;j++){
+            printf("%c",ELMTADJ(m,i,j));
+        }
+        printf("\n");
+    }
+}
 
 // int main(void){
 //     MAP M1;

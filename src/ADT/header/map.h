@@ -42,7 +42,7 @@ void getAdjacent(MAP *m, FILE *file);
 char getBuilding(MAP m,int x,int y);
 //Mengembalikan nama bangunan dengan memasukan koordinat
 
-int getIdxBld(char c);
+int getIdxBld(char c,MAP M);
 //Mengembalikan index bangunan di daftar lokasi
 
 void displayReachable(MAP m);
@@ -50,4 +50,5 @@ void displayReachable(MAP m);
 
 void clearReachable(MAP *m);
 //Menghapus matrix reachable
+void displayAdjacent(MAP m);
 #endif

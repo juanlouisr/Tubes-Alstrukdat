@@ -46,3 +46,35 @@ void mesinWaktu(STATE *state){
         CURR_TIME(*state) = 0;
     }
 }
+
+void updateStatus(STATE *s){
+    int i;
+    int idx;
+    char c;
+    Address ADR = CURR_TODO(*s);
+    c = getBuilding(CURR_MAP(*s),CURR_PLAYER(*s).loc.X ,CURR_PLAYER(*s).loc.Y );
+    idx = getIdxBld(c,CURR_MAP(*s));
+    for(i=0;i<nEffBuilding(CURR_MAP(*s));i++){
+        ELMTTP(CURR_MAP(*s),i) = 'b';
+    }
+    clearReachable(&CURR_MAP(*s));
+    for(i=0;i<nEffBuilding(CURR_MAP(*s));i++){
+        if(ELMTADJ(CURR_MAP(*s),idx,i) == '1'){
+            ELMTTP(CURR_MAP(*s),i) = 'r';
+            insertLast(&CURR_MAP(*s).reachable,LOK(CURR_MAP(*s),i));
+        } 
+    }
+    while(ADR != NULL){
+        if(INFO(ADR).waktudatang<=CURR_TIME(*s)){
+            idx = getIdxBld(INFO(ADR).locAwal,CURR_MAP(*s));
+            ELMTTP(CURR_MAP(*s),idx) = 'p';
+        }
+        ADR = NEXT(ADR);
+    }
+    if(!isEmptyTas(pTas(CURR_PLAYER(*s)))){
+        idx = getIdxBld(TOP(pTas(CURR_PLAYER(*s))).locAkhir,CURR_MAP(*s));
+        ELMTTP(CURR_MAP(*s),idx) = 'd';
+    }
+    idx = getIdxBld(c,CURR_MAP(*s));
+    ELMTTP(CURR_MAP(*s),idx) = 'm';
+}

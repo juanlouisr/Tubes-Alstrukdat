@@ -29,5 +29,7 @@ void CreateSTATE(STATE* state, PLAYER p, MAP map, Queue queue, float startTime);
 /* --------- PROSEDUR/FUNGSI STATE --------- */
 void incrementWaktu(STATE *state);
 void mesinWaktu(STATE *state);
+void updateStatus(STATE *s);
+//Update status dari bangunan
 
 #endif

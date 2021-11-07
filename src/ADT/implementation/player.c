@@ -16,26 +16,6 @@ void movePlayer(MAP m, PLAYER *p,int opt){
     pLoc(*p) = ELMTLD(REACH(m),opt-1);
 }
 
-void updateStatus(MAP *m,PLAYER p){
-    int i;
-    int idx;
-    char c;
-    for(i=0;i<nEffBuilding(*m);i++){
-        if(ELMTADJ(*m,idx,i) == '1'){
-            ELMTTP(*m,i) = 'b';
-        } 
-    }
-    clearReachable(m);
-    c = getBuilding(*m,Absis(pLoc(p)),Ordinat(pLoc(p)));
-    idx = getIdxBld(c);
-    for(i=0;i<nEffBuilding(*m);i++){
-        if(ELMTADJ(*m,idx,i) == '1'){
-            ELMTTP(*m,i) = 'r';
-            insertLast(&REACH(*m),LOK(*m,i));
-        } 
-    }
-    ELMTTP(*m,idx) = 'm';
-}
 
 void pickUp(PLAYER *p){
     if (TOP(pTas(*p)).tipe == VIP_ITEM){
@@ -178,3 +158,6 @@ void buyGadget(PLAYER *player, int idx){
     }
 }
 
+void displayMoney(PLAYER player){
+    printf("Uang anda sekarang: %d Yen\n",pUang(player));
+};

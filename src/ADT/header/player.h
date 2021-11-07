@@ -29,8 +29,6 @@ void createPlayer(PLAYER *p,LOKASI lokAwal, Tas tas, List todo, ListPos invGadge
     lokasi = lokAwal
 
 */
-void updateStatus(MAP *m,PLAYER p);
-//Update status dari bangunan
 
 void movePlayer(MAP m, PLAYER *p,int opt);
 //Memindahkan player ke lok
@@ -43,5 +41,6 @@ void useGadget(PLAYER *p, int idx);
 
 void buyGadget(PLAYER *player, int idx);
 
+void displayMoney(PLAYER player);
 
 #endif
