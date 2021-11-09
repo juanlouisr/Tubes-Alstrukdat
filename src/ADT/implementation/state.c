@@ -65,7 +65,7 @@ void updateStatus(STATE *s){
         } 
     }
     while(ADR != NULL){
-        if(INFO(ADR).waktudatang<=CURR_TIME(*s)){
+        if(!isContainItem(CURR_TAS(*s), INFO(ADR))){
             idx = getIdxBld(INFO(ADR).locAwal,CURR_MAP(*s));
             ELMTTP(CURR_MAP(*s),idx) = 'p';
         }
