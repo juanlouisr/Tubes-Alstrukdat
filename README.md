@@ -4,23 +4,41 @@ Untuk Pemenuhan Tugas Besar Algoritma Struktur Data IF2110
 
 ## To do List
                                     
-- [ ] Interface main program
+-[ ] Extra & Penyesuaian dengan spek
 
-- [ ] Fungsi input
+## Build & Run
 
-- [ ] fungsi map
+### Build
+```powershell
+gcc src/main.c src/ADT/implementation/*.c src/Utility/implementation/*.c -o bin/Main
+```
+### Run
+```powershell
+./bin/Main
+```
+### Build & Run
+```powershell
+./run.bat
+```
 
-- [ ] gabungin dan modif semua adt yang diperlukan
+## Test
 
-## Compile
+### Build & Running Test
+```powershell
+./testADT.bat
+```
 
-`$ gcc src/main.c src/ADT/implementation/*.c src/Utility/implementation/*.c -o bin/Main`
+### Dependencies
+- [libcester: 0.4](https://github.com/exoticlibraries/libcester)
+#### installing dependencies
+```powershell
+& $([scriptblock]::Create((New-Object Net.WebClient).DownloadString("https://exoticlibraries.github.io/magic/install.ps1"))) libcester
+```
 
-## Run
 
-`$ ./bin/Main`
+## About
 
-# About
+
 
 13520085
 
