@@ -100,3 +100,22 @@ void displayInProgress(Tas tas){
     }
     
 };
+
+void hapusPerishable(Tas *tas){
+    Tas tempTas;
+    while(!isEmpty(*tas)){
+        Item item;
+        pop(tas,&item);
+        if(tipe(item) == 'P' && ItemWaktuSkrng(item) <= 0){
+            continue;
+        }
+        else{
+            push(&tempTas,item);
+        }
+    }
+    while(!isEmpty(tempTas)){
+        Item item;
+        pop(&tempTas,&item);
+        push(tas,item);
+    }
+}

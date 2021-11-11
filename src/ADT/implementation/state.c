@@ -35,6 +35,12 @@ void incrementWaktu(STATE *state){
     }
     // CEK DELTA TIME
     // KURANGIN MASING MASING INTERNAL TIME PERISHABLE ITEM DALAM TAS DENGAN DELTA TIME
+    for(int i=0; i<TasCap(CURR_TAS(*state)); i++){
+        if(tipe(CURR_TAS(*state).buffer[i]) == 'P'){
+            ItemWaktuSkrng(CURR_TAS(*state).buffer[i]) -= deltaTime;
+        }
+    }
+    hapusPerishable(CURR_TAS(*state));
     
 }
 
