@@ -16,6 +16,17 @@ void movePlayer(MAP m, PLAYER *p,int opt){
     pLoc(*p) = ELMTLD(REACH(m),opt-1);
 }
 
+void pintuKemanaSaja(STATE *state){
+    displayReachable(CURR_MAP(*state));
+    printf("Mau pindah kemana?");
+    printf(">> ");
+    int opt = getIntSTDIN();
+    if (opt != 0)
+    {
+        movePlayer(CURR_MAP(*state), &CURR_PLAYER(*state), opt);
+        updateStatus(state);
+    }
+}
 
 void pickUp(PLAYER *p){
     if (TOP(pTas(*p)).tipe == VIP_ITEM){
@@ -77,7 +88,7 @@ void dropOff(PLAYER *p){
     }
 }
 
-void useGadget(PLAYER *p, int idx){
+void useGadget(PLAYER *p,STATE *state, int idx){
     if(!isIdxValidListStat(pInvG(*p), idx)){
         printf("Tidak ada gadget yang dapat digunakan.\n");
     }
@@ -85,19 +96,23 @@ void useGadget(PLAYER *p, int idx){
         printf("Tidak ada gadget yang dapat digunakan.\n");
     }
     else if(ELMTLS(pInvG(*p), idx) == 1){
-        //kainPembungkuswaktu()
+        printf("Kain pembungkus waktu berhasil digunakan.");
+        kainPembungkuswaktu(&pTas(*p));
         ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
     }
     else if(ELMTLS(pInvG(*p), idx) == 2){
-        //SenterPembesar()
+        printf("Senter pembesar berhasil digunakan.");
+        senterPembesar(&pTas(*p));
         ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
     }
     else if(ELMTLS(pInvG(*p), idx) == 3){
-        //pintuKemanaSaja()
+        printf("Pintu kemana saja berhasil digunakan.");
+        pintuKemanaSaja(state);
         ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
     }
     else if(ELMTLS(pInvG(*p), idx) == 4){
-        //mesinWaktu()
+        printf("Mesin waktu berhasil digunakan.");
+        mesinWaktu(state);
         ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
     }
 }

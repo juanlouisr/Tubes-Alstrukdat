@@ -160,7 +160,7 @@ void GameHandler(Word command, STATE *state)
         displayInventory(CURR_PLAYER(*state).invGadget);
         printf(">> ");
         int idx = getIntSTDIN();
-        useGadget(&CURR_PLAYER(*state),idx);
+        useGadget(&CURR_PLAYER(*state),state,idx);
     }
     else if (isWordEQ(command, "HELP"))
     {

@@ -76,6 +76,25 @@ void senterPembesar(Tas *s){
     }
 }
 
+void kainPembungkusWaktu(Tas *tas){
+    Tas tempTas;
+    boolean found = false;
+    while(!isEmpty(*tas) && !found){
+        Item item;
+        pop(tas,&item);
+        if(tipe(item) == 'P'){
+            ItemWaktuSkrng(item) = ItemWaktuSampai(item);
+            found = true;
+        }
+        push(&tempTas,item);
+    }
+    while(!isEmpty(tempTas)){
+        Item item;
+        pop(&tempTas,&item);
+        push(tas,item);
+    }
+}
+
 boolean isContainItem(Tas tas, Item item){
     Item tmp;
     boolean ada = false;

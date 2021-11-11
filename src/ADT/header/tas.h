@@ -56,10 +56,17 @@ void increaseCurrentMaxCapacity(Tas *s);
 /* F.S. max cap dari tas bertambah 1*/
 
 void senterPembesar(Tas *s);
+//Meningkatkan kapasitas tas 2 kali lipat
+
+void kainPembungkusWaktu(Tas *tas);
+//Reset internal time perishable teratas
 
 boolean isContainItem(Tas tas, Item item);
 //Mengembalikan true jika item ada di dalam tas dan false jika tidak
 
 void displayInProgress(Tas tas);
 // Menunjukan barang teratas pada tas serta lokasi tujuannya
+
+void hapusPerishable(Tas *tas);
+//Menghapus perishable item dengan internaltime kurang sama dengan 0
 #endif

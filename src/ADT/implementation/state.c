@@ -40,7 +40,7 @@ void incrementWaktu(STATE *state){
             ItemWaktuSkrng(CURR_TAS(*state).buffer[i]) -= deltaTime;
         }
     }
-    hapusPerishable(CURR_TAS(*state));
+    hapusPerishable(&CURR_TAS(*state));
     
 }
 
