@@ -79,16 +79,16 @@ void senterPembesar(Tas *s){
 void kainPembungkusWaktu(Tas *tas){
     Tas tempTas;
     boolean found = false;
-    while(!isEmpty(*tas) && !found){
+    while(!isEmptyTas(*tas) && !found){
         Item item;
         pop(tas,&item);
-        if(tipe(item) == 'P'){
+        if(ItemTipe(item) == 'P'){
             ItemWaktuSkrng(item) = ItemWaktuSampai(item);
             found = true;
         }
         push(&tempTas,item);
     }
-    while(!isEmpty(tempTas)){
+    while(!isEmptyTas(tempTas)){
         Item item;
         pop(&tempTas,&item);
         push(tas,item);
@@ -122,17 +122,17 @@ void displayInProgress(Tas tas){
 
 void hapusPerishable(Tas *tas){
     Tas tempTas;
-    while(!isEmpty(*tas)){
+    while(!isEmptyTas(*tas)){
         Item item;
         pop(tas,&item);
-        if(tipe(item) == 'P' && ItemWaktuSkrng(item) <= 0){
+        if(ItemTipe(item) == 'P' && ItemWaktuSkrng(item) <= 0){
             continue;
         }
         else{
             push(&tempTas,item);
         }
     }
-    while(!isEmpty(tempTas)){
+    while(!isEmptyTas(tempTas)){
         Item item;
         pop(&tempTas,&item);
         push(tas,item);

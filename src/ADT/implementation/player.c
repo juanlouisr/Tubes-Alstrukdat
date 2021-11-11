@@ -97,7 +97,7 @@ void useGadget(PLAYER *p,STATE *state, int idx){
     }
     else if(ELMTLS(pInvG(*p), idx) == 1){
         printf("Kain pembungkus waktu berhasil digunakan.");
-        kainPembungkuswaktu(&pTas(*p));
+        kainPembungkusWaktu(&pTas(*p));
         ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
     }
     else if(ELMTLS(pInvG(*p), idx) == 2){
