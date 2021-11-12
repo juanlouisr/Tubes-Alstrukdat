@@ -1,5 +1,6 @@
 #include "../header/item.h"
 #include <stdio.h>
+#include <math.h>
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create Item Pesanan */
@@ -73,11 +74,11 @@ void printInProgressItem(Item item)
         printf("VIP Item");
         break;
     case 'P':
-        printf("Perishable Item, sisa waktu %d", item.waktuSampai);
+        printf("Perishable Item, sisa waktu %.0f", ceil(item.internalTime));
         break;
 
     default:
-        printf("?? Item)");
+        printf("?? Item");
         break;
     }
     printf(" (Tujuan: %c)", item.locAkhir);

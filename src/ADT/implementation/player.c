@@ -63,7 +63,7 @@ void dropOff(PLAYER *p){
                 break;
             case HEAVY_ITEM:
                 pUang(*p) += 400;
-                pSpdDur(*p) = 5;
+                pSpdDur(*p) = 10;
                 break;
             case PERISHABLE_ITEM:
                 pUang(*p) += 400;

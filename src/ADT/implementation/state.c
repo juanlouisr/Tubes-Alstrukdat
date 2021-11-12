@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "../header/state.h"
 
 
@@ -35,7 +36,7 @@ void incrementWaktu(STATE *state){
     }
     // CEK DELTA TIME
     // KURANGIN MASING MASING INTERNAL TIME PERISHABLE ITEM DALAM TAS DENGAN DELTA TIME
-    for(int i=0; i<TasCap(CURR_TAS(*state)); i++){
+    for(int i=0; i<=IDX_TOP(CURR_TAS(*state)); i++){
         if(ItemTipe(CURR_TAS(*state).buffer[i]) == 'P'){
             ItemWaktuSkrng(CURR_TAS(*state).buffer[i]) -= deltaTime;
         }
@@ -147,5 +148,5 @@ void pintuKemanaSaja(STATE *s){
 
 void displayWaktu(STATE s)
 {
-    printf("Waktu: %.0f\n", CURR_TIME(s));
+    printf("Waktu: %.0f\n", floor(CURR_TIME(s)));
 }
