@@ -70,6 +70,13 @@ Word getWordSTDIN()
     return getWordInputStream(stdin);
 }
 
+Word convertIntToWord(int input)
+{
+    Word word;
+    sprintf(word.contents, "%ld", input);
+    return word;
+}
+
 int getIntInputStream(FILE* file)
 {
     Word word = getWordInputStream(file);
@@ -106,11 +113,54 @@ FILE* openFile(Word word, const char* mode)
     return fopen(str, mode);
 }
 
+FILE* copyConfig(Word in, Word out)
+{
+    FILE *ori = openFile(in, "r");
+    FILE *copy =  openFile(out, "w");
+    int row = getIntInputStream(ori);
+    int col = getIntInputStream(ori);
+    int x = getIntInputStream(ori);
+    int y = getIntInputStream(ori);
+    int jmlBangunan = getIntInputStream(ori);
+    fprintf(copy, "%d %d\n%d %d\n%d\n", row, col, x, y, jmlBangunan);
+    for(int i=0;i<jmlBangunan;i++){
+        char b = getCharInputStream(ori);
+        x = getIntInputStream(ori);
+        y = getIntInputStream(ori);
+        fprintf(copy,"%c %d %d\n",b,x,y);
+    }
+    for(int i=0;i<jmlBangunan+1;i++){
+        for(int j=0;j<jmlBangunan+1;j++){
+            if (j)
+                fprintf(copy, " ");
+            char el = getCharInputStream(ori);
+            fprintf(copy, "%c", el);
+        }
+        fprintf(copy, "\n");
+    }
+    int count = getIntInputStream(ori);
+    fprintf(copy, "%d\n", count);
+    for (int i = 0; i < count; i++)
+    {
+        int waktuDatang = getIntInputStream(ori);
+        int waktuSampai = 0;
+        char locAwal = getCharInputStream(ori);
+        char locAkhir = getCharInputStream(ori);
+        char tipe = getCharInputStream(ori);
+        fprintf(copy, "%d %c %c %c", waktuDatang, locAwal, locAkhir, tipe);
+        if (tipe == 'P')
+        {
+            waktuSampai = getIntInputStream(ori);
+            fprintf(copy, " %d", waktuSampai);
+        }
+        fprintf(copy, "\n");
+    }
+    return copy;
+}
+
 void wordOutputStream(FILE* outputstream, Word word, boolean newline)
 {
-    char str[WORDCAP];
-    wordToStr(word, str);
-    fprintf(outputstream, str);
+    fprintf(outputstream,"%s",word.contents);
     if(newline)fprintf(outputstream, "\n");
 }
 
