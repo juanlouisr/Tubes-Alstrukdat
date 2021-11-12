@@ -4,13 +4,13 @@ Untuk Pemenuhan Tugas Besar Algoritma Struktur Data IF2110
 
 ## To do List
                                     
--[ ] Extra & Penyesuaian dengan spek
+- [ ]Extra & Penyesuaian dengan spek
 
 ## Build & Run
 
 ### Build
 ```powershell
-gcc src/main.c src/ADT/implementation/*.c src/Utility/implementation/*.c -o bin/Main
+gcc src/*.c src/ADT/implementation/*.c src/Utility/implementation/*.c -o bin/Main
 ```
 ### Run
 ```powershell
@@ -28,17 +28,7 @@ gcc src/main.c src/ADT/implementation/*.c src/Utility/implementation/*.c -o bin/
 ./testADT.bat
 ```
 
-### Dependencies
-- [libcester: 0.4](https://github.com/exoticlibraries/libcester)
-#### installing dependencies
-```powershell
-& $([scriptblock]::Create((New-Object Net.WebClient).DownloadString("https://exoticlibraries.github.io/magic/install.ps1"))) libcester
-```
-
-
 ## About
-
-
 
 13520085
 
