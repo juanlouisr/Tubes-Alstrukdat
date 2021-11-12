@@ -74,6 +74,7 @@ void copyWord()
         adv();
     }
     currentWord.length = i;
+    currentWord.contents[i] = '\0'; 
 }
 
 int getStrLength(const char* str)
