@@ -150,3 +150,10 @@ void displayWaktu(STATE s)
 {
     printf("Waktu: %.0f\n", floor(CURR_TIME(s)));
 }
+
+boolean gameOver(STATE s)
+{
+    return isEmptyQ(CURR_QUEUE(s))
+        && isEmptyTas(CURR_TAS(s))
+        && isEmptyTodoList(CURR_TODO(s));
+}

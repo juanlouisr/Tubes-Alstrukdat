@@ -36,5 +36,7 @@ void updateStatus(STATE *s);
 //Update status dari bangunan
 
 void displayWaktu(STATE s);
+boolean gameOver(STATE s);
+
 
 #endif
