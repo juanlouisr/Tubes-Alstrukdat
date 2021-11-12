@@ -267,3 +267,14 @@ void deleteLastListStat(ListPos *l, ElType *val)
     *val = ELMTLS(*l, lengthListStat(*l) - 1);
     ELMTLS(*l, lengthListStat(*l) - 1) = VAL_UNDEF;
 }
+
+void deleteAtListStat(ListPos *l, int idx, ElType *val)
+{
+    int len = lengthListStat(*l);
+    *val = ELMTLS(*l, idx);
+    for (int i = idx; i < len-1; i++)
+    {
+        ELMTLS(*l, i) = ELMTLS(*l, i+1); 
+    }
+    ELMTLS(*l, len-1) = VAL_UNDEF;
+}

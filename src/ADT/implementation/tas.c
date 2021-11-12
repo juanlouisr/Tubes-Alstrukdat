@@ -78,6 +78,7 @@ void senterPembesar(Tas *s){
 
 void kainPembungkusWaktu(Tas *tas){
     Tas tempTas;
+    CreateTas(&tempTas);
     boolean found = false;
     while(!isEmptyTas(*tas) && !found){
         Item item;
@@ -122,6 +123,7 @@ void displayInProgress(Tas tas){
 
 void hapusPerishable(Tas *tas){
     Tas tempTas;
+    CreateTas(&tempTas);
     while(!isEmptyTas(*tas)){
         Item item;
         pop(tas,&item);

@@ -118,23 +118,16 @@ void displayList(DaftarLokasi l)
 
     if (isEmpty(l))
     {
-        printf("[]");
+        
     }
     else
     {
-        printf("[");
-        for (i = 0; i < length(l); i++)
-        {
-            if (i == 0)
-            {
-                printf("%d", ELMTLD(l, i));
-            }
-            else
-            {
-                printf(",%d", ELMTLD(l, i));
-            }
+        int i;
+        printf("Tempat yang bisa dicapai: \n");
+        for(i=0;i<length(l);i++){
+            printf("%d. ",i+1);
+            TulisLOKASI(ELMTLD(l,i));
         }
-        printf("]");
     }
 }
 

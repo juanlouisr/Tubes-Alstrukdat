@@ -121,5 +121,6 @@ void deleteLastListStat(ListPos *l, ElType *val);
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
+void deleteAtListStat(ListPos *l, int idx, ElType *val);
 
 #endif
