@@ -6,6 +6,9 @@ void LoadConfig(MAP *map, PLAYER *player, Queue *queue, FILE *file);
 void LoadNewState(STATE *state);
 void GameHandler(Word command, STATE *state);
 void displayHelp();
+void move(STATE *state);
+void buy(STATE *state);
+void use(STATE *state);
 
 
 int main()
@@ -26,16 +29,13 @@ int main()
         Word command;
         do
         {
-            printf("Mobita sekarang berada di titik ");
-            TulisLOKASI(CURR_PLAYER(state).loc);
-            printf("Waktu: %.0f\n", CURR_TIME(state));
-            printf("Uang yang dimiliki: %d Yen\n", pUang(CURR_PLAYER(state)));
+            displayCurrLoc(CURR_PLAYER(state));
+            displayWaktu(state);
+            displayMoney(CURR_PLAYER(state));
             printf(">> ");
             command = getWordSTDIN();
             GameHandler(command, &state);
         } while (!isWordEQ(command, "EXIT"));
-        
-
     }
     else if (isWordEQ(word, "2"))
     {
@@ -94,7 +94,7 @@ void LoadConfig(MAP *map, PLAYER *player, Queue *queue, FILE *file)
     CreateTas(&tas);
     CreateListStat(&invg);
     CreateListTodoList(&todo);
-    createPlayer(player,ELMTLD(DL,0),tas, todo, invg, 0, 0);
+    createPlayer(player,ELMTLD(DL,0),tas, todo, invg, 10000, 0);
 
     for(i=0;i<jmlBangunan;i++){
         b = getCharInputStream(file);
@@ -115,16 +115,7 @@ void GameHandler(Word command, STATE *state)
 {
     if (isWordEQ(command, "MOVE"))
     {
-        displayReachable(CURR_MAP(*state));
-        printf(">> ");
-        int opt = getIntSTDIN();
-        if (opt != 0)
-        {
-            movePlayer(CURR_MAP(*state), &CURR_PLAYER(*state), opt);
-            updateStatus(state);
-            incrementWaktu(state);
-            
-        }
+        move(state);
     }
     else if (isWordEQ(command, "MAP"))
     {
@@ -148,19 +139,11 @@ void GameHandler(Word command, STATE *state)
     }
     else if (isWordEQ(command, "BUY"))
     {
-        displayMoney(CURR_PLAYER(*state));
-        displayGadget();
-        printf(">> ");
-        int idx = getIntSTDIN();
-        buyGadget(&CURR_PLAYER(*state),idx);
-
+        buy(state);
     }
     else if (isWordEQ(command, "INVENTORY"))
     {
-        displayInventory(CURR_PLAYER(*state).invGadget);
-        printf(">> ");
-        int idx = getIntSTDIN();
-        useGadget(&CURR_PLAYER(*state),state,idx);
+        use(state);
     }
     else if (isWordEQ(command, "HELP"))
     {
@@ -170,7 +153,46 @@ void GameHandler(Word command, STATE *state)
     updateStatus(state);
 }
 
+
+void move(STATE *state)
+{
+    displayReachable(CURR_MAP(*state));
+    printf(">> ");
+    int opt = getIntSTDIN();
+    if (opt != 0)
+    {
+        movePlayer(CURR_MAP(*state), &CURR_PLAYER(*state), opt);
+        updateStatus(state);
+        incrementWaktu(state);
+    }
+}
+
+void buy(STATE *state)
+{
+    if (CURR_PLAYER(*state).loc.Nama == '8')
+    {
+        displayMoney(CURR_PLAYER(*state));
+        displayGadget();
+        printf(">> ");
+        int idx = getIntSTDIN();
+        buyGadget(&CURR_PLAYER(*state),idx);
+    }
+    else
+    {
+        printf("Mobita sedang tidak berada di HQ!\n");
+    }
+}
+
+void use(STATE *state)
+{
+    displayInventory(CURR_PLAYER(*state).invGadget);
+    printf(">> ");
+    int idx = getIntSTDIN();
+    useGadget(state, idx);
+}
+
 void displayHelp(){
+    printf(GREEN);
     printf("1. MOVE         : Menampilkan pilihan lokasi yang dapat dicapai lalu menerima input angka sesuai pilihan\n");
     printf("2. PICK_UP      : Mengambil item pada tempat pick up\n");
     printf("3. DROP_OFF     : Mengantarkan item ketika sudah tiba di lokasi, jika tidak ada yang perlu didrop maka akan muncul pesan\n");
@@ -180,4 +202,5 @@ void displayHelp(){
     printf("7. BUY          : Menampilkan gadget yang dapat dibeli lalu menerima input untuk membeli\n");
     printf("8. INVENTORY    : Menampilkan isi inventory yang dapat digunakan\n");
     printf("9. HELP         : Menampilkan list command yang dapat digunakan beserta penjelansannya\n");
+    printf(NORMAL);
 };
