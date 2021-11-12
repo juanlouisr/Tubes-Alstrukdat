@@ -13,20 +13,10 @@ void createPlayer(PLAYER *p,LOKASI lokAwal, Tas tas, List todo,
 }
 
 void movePlayer(MAP m, PLAYER *p,int opt){
-    pLoc(*p) = ELMTLD(REACH(m),opt-1);
+    if (opt > 0 && opt <= length(REACH(m)))
+        pLoc(*p) = ELMTLD(REACH(m),opt-1);
 }
 
-void pintuKemanaSaja(STATE *state){
-    displayReachable(CURR_MAP(*state));
-    printf("Mau pindah kemana?");
-    printf(">> ");
-    int opt = getIntSTDIN();
-    if (opt != 0)
-    {
-        movePlayer(CURR_MAP(*state), &CURR_PLAYER(*state), opt);
-        updateStatus(state);
-    }
-}
 
 void pickUp(PLAYER *p){
     if (TOP(pTas(*p)).tipe == VIP_ITEM){
@@ -41,10 +31,17 @@ void pickUp(PLAYER *p){
             // Ngambil dari todolist
             Address temp = pTodo(*p);
             while (temp != NULL && !found){
-                if (INFO(temp).locAwal == pLoc(*p).Nama && !isContainItem(pTas(*p), INFO(temp))){
+                if (INFO(temp).locAwal == pLoc(*p).Nama){
                     found = true;
                     push(&pTas(*p), INFO(temp));
-                    printf("Pesanan masuk tas!\n");
+                    printf("Pesanan "); 
+                    printInProgressItem(INFO(temp));
+                    printf(" masuk tas!\n");
+                    Item item;
+                    int idx = indexOfTodoList(pTodo(*p), INFO(temp));
+                    if (idx != IDX_UNDEF){
+                        deleteAtTodoList(&pTodo(*p), idx, &item);
+                    }
                 }
                 else{
                     temp = NEXT(temp);
@@ -79,43 +76,14 @@ void dropOff(PLAYER *p){
             default:
                 break;
             }
-            // Hapus dari todo
-            int idx = indexOfTodoList(pTodo(*p), item);
-            if (idx != IDX_UNDEF){
-                deleteAtTodoList(&pTodo(*p), idx, &item);
-            }
+            printf("Pesanan "); 
+            printInProgressItem(item);
+            printf(" berhasil diantar!\n");
         }
     }
 }
 
-void useGadget(PLAYER *p,STATE *state, int idx){
-    if(!isIdxValidListStat(pInvG(*p), idx)){
-        printf("Tidak ada gadget yang dapat digunakan.\n");
-    }
-    else if(ELMTLS(pInvG(*p), idx) == VAL_UNDEF){
-        printf("Tidak ada gadget yang dapat digunakan.\n");
-    }
-    else if(ELMTLS(pInvG(*p), idx) == 1){
-        printf("Kain pembungkus waktu berhasil digunakan.");
-        kainPembungkusWaktu(&pTas(*p));
-        ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
-    }
-    else if(ELMTLS(pInvG(*p), idx) == 2){
-        printf("Senter pembesar berhasil digunakan.");
-        senterPembesar(&pTas(*p));
-        ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
-    }
-    else if(ELMTLS(pInvG(*p), idx) == 3){
-        printf("Pintu kemana saja berhasil digunakan.");
-        pintuKemanaSaja(state);
-        ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
-    }
-    else if(ELMTLS(pInvG(*p), idx) == 4){
-        printf("Mesin waktu berhasil digunakan.");
-        mesinWaktu(state);
-        ELMTLS(pInvG(*p), idx) = VAL_UNDEF;
-    }
-}
+
 
 
 void buyGadget(PLAYER *player, int idx){
@@ -176,3 +144,9 @@ void buyGadget(PLAYER *player, int idx){
 void displayMoney(PLAYER player){
     printf("Uang anda sekarang: %d Yen\n",pUang(player));
 };
+
+void displayCurrLoc(PLAYER player)
+{
+    printf("Mobita sekarang berada di titik ");
+    TulisLOKASI(player.loc);
+}

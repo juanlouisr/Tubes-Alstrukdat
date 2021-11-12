@@ -29,7 +29,12 @@ void CreateSTATE(STATE* state, PLAYER p, MAP map, Queue queue, float startTime);
 /* --------- PROSEDUR/FUNGSI STATE --------- */
 void incrementWaktu(STATE *state);
 void mesinWaktu(STATE *state);
+void pintuKemanaSaja(STATE *state);
+//Memindahkan player ke lok tanpa menambah waktu
+void useGadget(STATE *state, int idx);
 void updateStatus(STATE *s);
 //Update status dari bangunan
+
+void displayWaktu(STATE s);
 
 #endif

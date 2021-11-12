@@ -33,17 +33,14 @@ void createPlayer(PLAYER *p,LOKASI lokAwal, Tas tas, List todo, ListPos invGadge
 void movePlayer(MAP m, PLAYER *p,int opt);
 //Memindahkan player ke lok
 
-void pintuKemanaSaja(STATE *state);
-//Memindahkan player ke lok tanpa menambah waktu
-
 void pickUp(PLAYER *p);
 
 void dropOff(PLAYER *p);
 
-void useGadget(PLAYER *p,STATE *state, int idx);
-
 void buyGadget(PLAYER *player, int idx);
 
 void displayMoney(PLAYER player);
+
+void displayCurrLoc(PLAYER player);
 
 #endif

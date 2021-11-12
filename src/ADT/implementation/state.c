@@ -14,7 +14,7 @@ void CreateSTATE(STATE* state, PLAYER p, MAP map, Queue queue, float startTime)
 
 void incrementWaktu(STATE *state){
     float deltaTime = 0;
-    if(pSpdDur(CURR_PLAYER(*state)) > 0 && hCount(CURR_TAS(*state)) == 0){
+    if(pSpdDur(CURR_PLAYER(*state)) > 0 && hCount(CURR_TAS(*state)) < 1){
         pSpdDur(CURR_PLAYER(*state))  -= 1;
         deltaTime += 0.5;
     }
@@ -31,7 +31,7 @@ void incrementWaktu(STATE *state){
     {
         Item item;
         dequeue(&CURR_QUEUE(*state), &item);
-        insertFirstTodoList(&CURR_TODO(*state), item);
+        insertLastTodoList(&CURR_TODO(*state), item);
     }
     // CEK DELTA TIME
     // KURANGIN MASING MASING INTERNAL TIME PERISHABLE ITEM DALAM TAS DENGAN DELTA TIME
@@ -44,14 +44,6 @@ void incrementWaktu(STATE *state){
     
 }
 
-void mesinWaktu(STATE *state){
-    if(CURR_TIME(*state) >= 50){
-        CURR_TIME(*state) -= 50;
-    }
-    else{
-        CURR_TIME(*state) = 0;
-    }
-}
 
 void updateStatus(STATE *s){
     int i;
@@ -83,4 +75,77 @@ void updateStatus(STATE *s){
     }
     idx = getIdxBld(c,CURR_MAP(*s));
     ELMTTP(CURR_MAP(*s),idx) = 'm';
+}
+
+
+void useGadget(STATE *state, int idx){
+    if (idx == 0)
+    {
+        return;
+    }
+    idx--;
+    PLAYER *p = &CURR_PLAYER(*state);
+    ElType temp;
+    if(!isIdxValidListStat(pInvG(*p), idx)){
+        printf("Tidak ada gadget yang dapat digunakan.");
+    }
+    else if(ELMTLS(pInvG(*p), idx) == VAL_UNDEF){
+        printf("Tidak ada gadget yang dapat digunakan.");
+    }
+    else if(ELMTLS(pInvG(*p), idx) == 1){
+        printf("Kain pembungkus waktu berhasil digunakan.");
+        kainPembungkusWaktu(&pTas(*p));
+        deleteAtListStat(&pInvG(*p), idx, &temp);
+    }
+    else if(ELMTLS(pInvG(*p), idx) == 2){
+        printf("Senter pembesar berhasil digunakan.");
+        senterPembesar(&pTas(*p));
+        deleteAtListStat(&pInvG(*p), idx, &temp);
+    }
+    else if(ELMTLS(pInvG(*p), idx) == 3){
+        printf("Pintu kemana saja berhasil digunakan.");
+        pintuKemanaSaja(state);
+        deleteAtListStat(&pInvG(*p), idx, &temp);
+    }
+    else if(ELMTLS(pInvG(*p), idx) == 4){
+        printf("Mesin waktu berhasil digunakan.");
+        mesinWaktu(state);
+        deleteAtListStat(&pInvG(*p), idx, &temp);
+    }
+    printf("\n");
+    
+}
+
+
+void mesinWaktu(STATE *state){
+    if(CURR_TIME(*state) >= 50){
+        CURR_TIME(*state) -= 50;
+    }
+    else{
+        CURR_TIME(*state) = 0;
+    }
+}
+
+
+void pintuKemanaSaja(STATE *s){
+    displayList(CURR_MAP(*s).daftarlok);
+    printf("Mau pindah kemana?");
+    printf(">> ");
+    int opt = getIntSTDIN();
+    if (opt < 0 && opt > length(CURR_MAP(*s).daftarlok))
+    {
+        printf("Lokasi tidak valid!\n");
+    }
+    else
+    {
+        if (opt != 0)
+        {
+            pLoc(CURR_PLAYER(*s)) = ELMTLD(CURR_MAP(*s).daftarlok, opt-1);
+        }
+    }
+}
+
+void displayWaktu(STATE s)
+{
+    printf("Waktu: %.0f\n", CURR_TIME(s));
 }
