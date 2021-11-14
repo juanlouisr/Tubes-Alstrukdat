@@ -299,3 +299,21 @@ Item getItemAtLoc(List l, char loc, Tas tas)
     }
     return item;
 }
+
+boolean isContainVIP(List l)
+{
+    Address p = FIRST(l);
+    boolean found = false;
+    while (p != NULL && !found)
+    {
+        if (INFO(p).tipe == VIP_ITEM)
+        {
+            found = true;
+        }
+        else
+        {
+            p = NEXT(p);
+        }
+    }
+    return found;
+}

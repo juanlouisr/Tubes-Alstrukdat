@@ -20,7 +20,7 @@ void movePlayer(MAP m, PLAYER *p,int opt){
 
 
 void pickUp(PLAYER *p){
-    if (TOP(pTas(*p)).tipe == VIP_ITEM){
+    if (TOP(pTas(*p)).tipe == VIP_ITEM || isContainVIP(pTodo(*p))){
         printf("ZHISUKA MARAH LHOO\n");
     }
     else{

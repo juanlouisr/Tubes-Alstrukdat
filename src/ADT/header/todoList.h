@@ -89,4 +89,6 @@ int lengthTodoList(List l);
 
 Item getItemAtLoc(List l, char loc, Tas tas);
 
+boolean isContainVIP(List l);
+
 #endif
