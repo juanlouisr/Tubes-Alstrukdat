@@ -13,6 +13,7 @@ typedef struct {
     ListPos invGadget;
     int uang;
     int speedBoostDur;
+    int vipReturned;
 } PLAYER;
 
 #define pLoc(p) (p).loc
@@ -42,5 +43,7 @@ void buyGadget(PLAYER *player, int idx);
 void displayMoney(PLAYER player);
 
 void displayCurrLoc(PLAYER player);
+
+void returnToSender(PLAYER *player);
 
 #endif

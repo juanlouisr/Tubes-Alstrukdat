@@ -10,6 +10,7 @@ void createPlayer(PLAYER *p,LOKASI lokAwal, Tas tas, List todo,
     pTodo(*p) = todo;
     pInvG(*p) = invGadget;
     pSpdDur(*p) = speedBoostDur;
+    (*p).vipReturned = 0;
 }
 
 void movePlayer(MAP m, PLAYER *p,int opt){
@@ -71,7 +72,7 @@ void dropOff(PLAYER *p){
                 break;
             case VIP_ITEM:
                 pUang(*p) += 600;
-                // tambah abilty return to sender
+                (*p).vipReturned++;
                 break;
             default:
                 break;
@@ -149,4 +150,37 @@ void displayCurrLoc(PLAYER player)
 {
     printf("Mobita sekarang berada di titik ");
     TulisLOKASI(player.loc);
+}
+
+void returnToSender(PLAYER *player)
+{
+    if ((*player).vipReturned)
+    {
+        if (!isEmptyTas(pTas(*player)))
+        {
+            if (TOP(pTas(*player)).tipe != VIP_ITEM)
+            {
+                (*player).vipReturned--;
+                Item item;
+                pop(&pTas(*player), &item);
+                if (item.tipe == PERISHABLE_ITEM)
+                {
+                    // reset internal time
+                    item.internalTime = item.waktuSampai;
+                }
+                insertLastTodoList(&pTodo(*player), item);
+            }
+            else
+            {
+                printf("Mobita harus segera melayani Zhisuka!\n");
+            }
+        }
+        {
+            printf("Tas Mobita kosong!\n");
+        }
+    }
+    else
+    {
+        printf("Mobita tidak memiliki Ability Return To Sender!\n");
+    }
 }

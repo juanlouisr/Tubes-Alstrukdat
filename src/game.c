@@ -116,6 +116,10 @@ void GameHandler(Word command, STATE *state, FILE *file)
     {
         load(state);
     }
+    else if (isWordEQ(command, "RETURN"))
+    {
+        returnToSender(&CURR_PLAYER(*state));
+    }
     printf("\n");
     updateStatus(state);
 }
@@ -229,8 +233,9 @@ void displayHelp(){
     printf("6. IN_PROGRESS  : Menampilkan pesanan yang sedang diantarkan\n");
     printf("7. BUY          : Menampilkan gadget yang dapat dibeli lalu menerima input untuk membeli\n");
     printf("8. INVENTORY    : Menampilkan isi inventory yang dapat digunakan\n");
-    printf("9. SAVE         : Menyimpan State permainan ke dalam output file masukan pemain\n");
-    printf("10.LOAD         : Menload State permainan dari file save masukan pemain\n");
-    printf("11.HELP         : Menampilkan list command yang dapat digunakan beserta penjelansannya\n");
+    printf("9. RETURN       : Mengembalikan Item tas paling atas ke sender\n");
+    printf("10.SAVE         : Menyimpan State permainan ke dalam output file masukan pemain\n");
+    printf("11.LOAD         : Menload State permainan dari file save masukan pemain\n");
+    printf("12.HELP         : Menampilkan list command yang dapat digunakan beserta penjelansannya\n");
     printf(NORMAL);
 };
