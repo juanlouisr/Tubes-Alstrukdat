@@ -4,7 +4,7 @@ Untuk Pemenuhan Tugas Besar Algoritma Struktur Data IF2110
 
 ## Tentang Program
 
-Permainan mongangis adalah permain mengantarkan pesananan secepatnya. Disini anda berperan sebagai mobita yang harus mengantarkan pesananan dari suatu titik ke titik lainnya. Semakin berjalannya permainan akan ada pesanan pesanan yang datang dan harus diantar. Pesanan yang diambil dari suatu titik akan masuk ke dalam tas. Terdapat juga ability dan gadget yang dapat digunakan dalam untuk membantu mobita mengantarkan pesanan pelanggan. Salah satu pelanggan Mobita adalah Zhisuka, Zhisuka adalah pelanggan sekai-ichiban Mobita delivery. Jadi kamu harus segera mengantarkan pesanan Zhisuka jika ada pesanan dia yang masuk.
+Permainan monangis adalah permain mengantarkan pesanan secepatnya. Disini anda berperan sebagai Mobita yang harus mengantarkan pesananan dari suatu lokasi ke lokasi lainnya. Semakin berjalannya permainan akan ada pesanan pesanan yang datang dan harus diantar. Pesanan yang diambil dari suatu lokasi akan masuk ke dalam tas. Terdapat juga ability dan gadget yang dapat digunakan dalam untuk membantu mobita mengantarkan pesanan pelanggan. Salah satu pelanggan Mobita adalah Zhisuka, Zhisuka adalah pelanggan sekai-ichiban Mobita delivery. Jadi kamu harus segera mengantarkan pesanan Zhisuka jika ada pesanan dia yang masuk.
 
 
 Untuk menjalankan program dapat dilihat di [Build & Run](#Build--Run). Struktur Program dapat di lihat di [Struktur Program](#Struktur-Program). Status pengerjaan dapat dilihat di [Status](#Status).
@@ -104,12 +104,12 @@ gcc src/*.c src/ADT/implementation/*.c src/Utility/implementation/*.c -o bin/Mai
 
 ## About
 
-- 13518026 @farisfadhilah
+- 13518026 [@farisfadhilah](https://github.com/farisfadhilah)
 
-- 13519075 @mizuday
+- 13519075 [@mizuday](https://github.com/mizuday)
 
-- 13520085 @ubaidalih
+- 13520085 [@ubaidalih](https://github.com/ubaidalih)
 
-- 13520091 @IMYELI
+- 13520091 [@IMYELI](https://github.com/IMYELI)
 
-- 13520093 @vincen-tho
+- 13520093 [@vincen-tho](https://github.com/vincen-tho)
