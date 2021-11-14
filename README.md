@@ -7,7 +7,7 @@ Untuk Pemenuhan Tugas Besar Algoritma Struktur Data IF2110
 Permainan mongangis adalah permain mengantarkan pesananan secepatnya. Disini anda berperan sebagai mobita yang harus mengantarkan pesananan dari suatu titik ke titik lainnya. Semakin berjalannya permainan akan ada pesanan pesanan yang datang dan harus diantar. Pesanan yang diambil dari suatu titik akan masuk ke dalam tas. Terdapat juga ability dan gadget yang dapat digunakan dalam untuk membantu mobita mengantarkan pesanan pelanggan. Salah satu pelanggan Mobita adalah Zhisuka, Zhisuka adalah pelanggan sekai-ichiban Mobita delivery. Jadi kamu harus segera mengantarkan pesanan Zhisuka jika ada pesanan dia yang masuk.
 
 
-Untuk menjalankan program dapat dilihat di [Build & Run](#Build-&-Run). Struktur Program dapat di lihat di [Struktur Program](#Struktur-Program)
+Untuk menjalankan program dapat dilihat di [Build & Run](#Build--Run). Struktur Program dapat di lihat di [Struktur Program](#Struktur-Program). Status pengerjaan dapat dilihat di [Status](#Status).
 
 ## Struktur Program
 
