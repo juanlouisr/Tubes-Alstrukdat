@@ -118,6 +118,7 @@ void GameHandler(Word command, STATE *state, FILE *file)
     }
     else if (isWordEQ(command, "RETURN"))
     {
+        commands[ccount++] = command;
         returnToSender(&CURR_PLAYER(*state));
     }
     printf("\n");
@@ -137,7 +138,6 @@ void move(STATE *state, FILE *file)
         updateStatus(state);
         incrementWaktu(state);
     }
-    printf("%d\n", opt);
 }
 
 void buy(STATE *state, FILE *file)

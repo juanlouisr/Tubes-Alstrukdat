@@ -20,8 +20,8 @@ void movePlayer(MAP m, PLAYER *p,int opt){
 
 
 void pickUp(PLAYER *p){
-    if (TOP(pTas(*p)).tipe == VIP_ITEM || isContainVIP(pTodo(*p))){
-        printf("ZHISUKA MARAH LHOO\n");
+    if (TOP(pTas(*p)).tipe == VIP_ITEM){
+        printf("Harus segera mengantar pesanan Zhisuka\n");
     }
     else{
         if (isFullTas(pTas(*p))){
@@ -34,19 +34,46 @@ void pickUp(PLAYER *p){
             while (temp != NULL && !found){
                 if (INFO(temp).locAwal == pLoc(*p).Nama){
                     found = true;
-                    push(&pTas(*p), INFO(temp));
-                    printf("Pesanan "); 
-                    printInProgressItem(INFO(temp));
-                    printf(" masuk tas!\n");
-                    Item item;
-                    int idx = indexOfTodoList(pTodo(*p), INFO(temp));
-                    if (idx != IDX_UNDEF){
-                        deleteAtTodoList(&pTodo(*p), idx, &item);
+                    if (!isContainVIP(pTodo(*p)))
+                    {
+                        push(&pTas(*p), INFO(temp));
+                        printf("Pesanan "); 
+                        printInProgressItem(INFO(temp));
+                        printf(" masuk tas!\n");
+                        Item item;
+                        int idx = indexOfTodoList(pTodo(*p), INFO(temp));
+                        if (idx != IDX_UNDEF){
+                            deleteAtTodoList(&pTodo(*p), idx, &item);
+                        }
                     }
+                    else
+                    {
+                        if (INFO(temp).tipe == VIP_ITEM)
+                        {
+                            push(&pTas(*p), INFO(temp));
+                            printf("Pesanan "); 
+                            printInProgressItem(INFO(temp));
+                            printf(" masuk tas!\n");
+                            Item item;
+                            int idx = indexOfTodoList(pTodo(*p), INFO(temp));
+                            if (idx != IDX_UNDEF){
+                                deleteAtTodoList(&pTodo(*p), idx, &item);
+                            }
+                        }
+                        else
+                        {
+                            printf("Harus segera mengambil pesanan Zhisuka!\n");
+                        }
+                    }
+                    
                 }
                 else{
                     temp = NEXT(temp);
                 }
+            }
+            if (!found)
+            {
+                printf("Tidak ditemukan pesanan!\n");
             }
         }
     }
@@ -175,6 +202,7 @@ void returnToSender(PLAYER *player)
                 printf("Mobita harus segera melayani Zhisuka!\n");
             }
         }
+        else
         {
             printf("Tas Mobita kosong!\n");
         }

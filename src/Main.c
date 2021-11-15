@@ -45,6 +45,7 @@ int main()
         displayMoney(CURR_PLAYER(state));
         printf(">> ");
         command = getWordSTDIN();
+        clearConsole();
         GameHandler(command, &state, stdin);
     } while (!isWordEQ(command, "EXIT") && !gameOver(state));
 
