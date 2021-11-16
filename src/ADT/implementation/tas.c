@@ -11,6 +11,7 @@ void CreateTas(Tas *s)
     IDX_TOP(*s) = IDX_UNDEF;
     TasCap(*s) = TASCAP;
     hCount(*s) = 0;
+    pengecil(*s) = false;
 }
 
 /* ************ Prototype ************ */
@@ -73,6 +74,13 @@ void senterPembesar(Tas *s){
     }
     else{
         TasCap(*s) = 100; 
+    }
+}
+
+void senterPengecil(Tas *s){
+    if(TOP(*s).tipe == 'H'){
+        hCount(*s)--;
+        pengecil(*s) = true;
     }
 }
 

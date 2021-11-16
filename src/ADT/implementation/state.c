@@ -113,6 +113,11 @@ void useGadget(STATE *state, int idx){
         mesinWaktu(state);
         deleteAtListStat(&pInvG(*p), idx, &temp);
     }
+    else if(ELMTLS(pInvG(*p), idx) == 5){
+        printf("Senter pengecil berhasil digunakan.");
+        senterPengecil(&pTas(*p));
+        deleteAtListStat(&pInvG(*p), idx, &temp);
+    }
     printf("\n");
     
 }

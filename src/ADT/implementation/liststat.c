@@ -93,6 +93,7 @@ void displayGadget(){
     printf("2. Senter Pembesar (1200 Yen)\n");
     printf("3. Pintu Kemana Saja (1500 Yen)\n");
     printf("4. Mesin Waktu (3000 Yen)\n");
+    printf("5. Senter Pengecil (800 Yen)\n");
     printf("Gadget mana yang ingin kau beli? (ketik 0 jika ingin kembali)\n");
 }
 
@@ -109,6 +110,9 @@ void displayInventory(ListPos l){
         }
         else if(ELMTLS(l, i) == 4){
             printf("%d. Mesin Waktu\n",i+1);
+        }
+        else if(ELMTLS(l, i) == 5){
+            printf("%d. Senter Pengecil\n",i+1);
         }
         else if(ELMTLS(l, i) == VAL_UNDEF){
             printf("%d. -\n",i+1);

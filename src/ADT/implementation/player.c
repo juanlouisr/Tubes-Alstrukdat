@@ -84,6 +84,10 @@ void dropOff(PLAYER *p){
         if (pLoc(*p).Nama == TOP(pTas(*p)).locAkhir){
             Item item;
             pop(&pTas(*p), &item);
+            if(pengecil(pTas(*p))){
+                pengecil(pTas(*p)) = false;
+                hCount(pTas(*p)) += 1;
+            }
             switch (item.tipe)
             {
             case NORMAL_ITEM:
@@ -166,6 +170,17 @@ void buyGadget(PLAYER *player, int idx){
                 printf("Uang tidak cukup untuk membeli gadget.\n");
             }
         }
+        else if(idx == 5){
+            if((*player).uang >= 800){
+                (*player).uang -= 800;
+                insertLastListStat(&pInvG(*player), idx);
+                printf("Senter Pengecil berhasil dibeli.\n");
+                printf("Uang Anda sekarang : %d Yen", (*player).uang);
+            }
+            else{
+                printf("Uang tidak cukup untuk membeli gadget.\n");
+            }
+        }
     }
 }
 
@@ -190,6 +205,10 @@ void returnToSender(PLAYER *player)
                 (*player).vipReturned--;
                 Item item;
                 pop(&pTas(*player), &item);
+                if(pengecil(pTas(*player))){
+                    pengecil(pTas(*player)) = false;
+                    hCount(pTas(*player)) += 1;
+                }
                 if (item.tipe == PERISHABLE_ITEM)
                 {
                     // reset internal time

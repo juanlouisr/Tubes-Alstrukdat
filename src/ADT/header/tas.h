@@ -18,6 +18,7 @@ typedef struct
   int idxTop;            /* alamat TOP: elemen puncak */
   int currentMaxCapacity;
   short heavyCount;
+  boolean pengecil;
 } Tas;
 
 /* ********* AKSES (Selektor) ********* */
@@ -26,6 +27,7 @@ typedef struct
 #define TOP(s) (s).buffer[(s).idxTop]
 #define TasCap(s) (s).currentMaxCapacity
 #define hCount(s) (s).heavyCount
+#define pengecil(s) (s).pengecil
 /* *** Konstruktor/Kreator *** */
 void CreateTas(Tas *s);
 /* I.S. sembarang; */
@@ -57,6 +59,8 @@ void increaseCurrentMaxCapacity(Tas *s);
 
 void senterPembesar(Tas *s);
 //Meningkatkan kapasitas tas 2 kali lipat
+
+void senterPengecil(Tas *s);
 
 void kainPembungkusWaktu(Tas *tas);
 //Reset internal time perishable teratas
