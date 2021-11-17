@@ -48,7 +48,7 @@ void LoadConfig(MAP *map, PLAYER *player, Queue *queue, FILE *file)
     CreateTas(&tas);
     CreateListStat(&invg);
     CreateListTodoList(&todo);
-    createPlayer(player,ELMTLD(DL,0),tas, todo, invg, 10000, 0);
+    createPlayer(player,ELMTLD(DL,0),tas, todo, invg, 0, 0);
 
     for(i=0;i<jmlBangunan;i++){
         b = getCharInputStream(file);
