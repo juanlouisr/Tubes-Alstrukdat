@@ -10,7 +10,7 @@ Permainan monangis adalah permain mengantarkan pesanan secepatnya. Disini anda b
 Untuk menjalankan program dapat dilihat di [Build & Run](#Build--Run). Struktur Program dapat di lihat di [Struktur Program](#Struktur-Program). Status pengerjaan dapat dilihat di [Status](#Status).
 
 
-Folder save dan konfigurasi berada pada [src/data](/tree/main/src/data)
+Folder save dan konfigurasi berada pada [src/data](/src/data)
 
 ## Struktur Program
 
