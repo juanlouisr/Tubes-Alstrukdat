@@ -73,7 +73,7 @@ Word getWordSTDIN()
 Word convertIntToWord(int input)
 {
     Word word;
-    sprintf(word.contents, "%ld", input);
+    sprintf(word.contents, "%d", input);
     return word;
 }
 

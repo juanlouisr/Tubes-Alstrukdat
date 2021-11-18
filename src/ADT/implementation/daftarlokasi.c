@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../header/DaftarLokasi.h"
+#include "../header/daftarlokasi.h"
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
@@ -83,26 +83,26 @@ void readList(DaftarLokasi *l)
       0 satu per satu diakhiri enter */
 /*    Jika N = 0; hanya terbentuk l kosong */
 {
-    int n;
-    do
-    {
-        scanf("%d", &n);
-    } while (n > CAPACITY(*l) || n < 0);
+    // int n;
+    // do
+    // {
+    //     scanf("%d", &n);
+    // } while (n > CAPACITY(*l) || n < 0);
 
-    if (n > 0)
-    {
-        IdxType i;
+    // if (n > 0)
+    // {
+    //     IdxType i;
 
-        NEFF(*l) = n;
-        for (i = 0; i < n; i++)
-        {
-            scanf("%d", &ELMTLD(*l, i));
-        }
-    }
-    else
-    {
-        NEFF(*l) = 0;
-    }
+    //     NEFF(*l) = n;
+    //     for (i = 0; i < n; i++)
+    //     {
+    //         scanf("%d", &ELMTLD(*l, i));
+    //     }
+    // }
+    // else
+    // {
+    //     NEFF(*l) = 0;
+    // }
 }
 
 void displayList(DaftarLokasi l)

@@ -3,7 +3,7 @@
 
 
 #include <stdio.h>
-#include "../../adt/header/wordmachine.h"
+#include "../../ADT/header/wordmachine.h"
 
 void printLogo();
 

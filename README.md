@@ -90,22 +90,35 @@ Untuk mengcompile program dapat menjalankan command berikut pada powershell di r
 ```powershell
 gcc src/*.c src/ADT/implementation/*.c src/Utility/implementation/*.c -o bin/Main
 ```
-### Run
-untuk menjalankan program dapat menjalankan command berikut pada powershell di root folder
 
-```powershell
+Pada linux, untuk mengcompile program silahlan jalankan command berikut di bash/zsh di root folder
+
+```bash
+gcc src/*.c src/ADT/implementation/*.c src/Utility/implementation/*.c -o bin/Main -lm
+```
+
+### Run
+Untuk menjalankan program dapat menjalankan command berikut pada powershell atau bash di root folder
+
+```bash
 ./bin/Main
 ```
+
 ### Build & Run
-Pada OS Windows, bisa langsung menjalankan batch file `run.bat` di root folder
+Pada OS Windows, bisa langsung menjalankan batch file `run.bat` di root folder dengan powershell
 
 ```powershell
 ./run.bat
 ```
+Pada OS Linux, bisa langsung menjalankan shell file `run.sh` di root folder pada bash ataupun zsh
+```bash
+./run.sh
+```
+
 #### catatan
-- Untuk Linux terdapat beberapa include file yang perlu diubah namanya
 - Kompilasi program pada linux harus menambahkan flag `-lm` untuk linking dengan `<math.h>`
 - Jika program berhasil dikompilasi tetapi tidak jalan setelah input file config, pastikan compiler (gcc) menggunakan versi terbaru (direkomendasikan versi 11.2.0) atau setidaknya menggunakan distribusi MinGW atau MinGW-w64
+- Jika file `run.sh` tidak bisa dijalankan, ubah file `run.sh` menjadi executable dengan command `chmod +x run.sh`
 
 ## Test
 ### Build & Running Test
@@ -113,6 +126,9 @@ Untuk testing bisa menjalan script `testADT.bat` di root folder
 
 ```powershell
 ./testADT.bat
+```
+```bash
+./testADT.sh
 ```
 
 ## Technologies
